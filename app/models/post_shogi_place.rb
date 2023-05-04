@@ -1,0 +1,2 @@
+class PostShogiPlace < ApplicationRecord
+end
