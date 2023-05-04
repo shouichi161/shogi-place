@@ -1,4 +1,4 @@
-class Public::ShogiPlacesController < ApplicationController
+class Public::PostShogiPlacesController < ApplicationController
   def new
   end
 

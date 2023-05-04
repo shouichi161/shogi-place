@@ -19,7 +19,7 @@ Rails.application.routes.draw do
         patch 'withdrawal'
       end
     end
-    resources:shogi_places do
+    resources:post_shogi_places do
       resources:postcomments,only:[:create,:destroy]
       resource:favorites,only:[:create,:destroy]
     end
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources:customers,only:[:index,:show,:edit,:update]
-    resources:shogi_places,only:[:show,:destroy] do
+    resources:post_shogi_places,only:[:show,:destroy] do
       resources:postcomments,only:[:destroy]
     end
   end
