@@ -1,0 +1,2 @@
+class ActivitysTagRelation < ApplicationRecord
+end
