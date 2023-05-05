@@ -4,7 +4,10 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  
+  has_many:post_shogi_places,dependent: :destroy
+  has_many:postcomments,     dependent: :destroy
+  has_many:favorites,        dependent: :destroy
+
   has_one_attached:customer_image
 
   def get_customer_image
