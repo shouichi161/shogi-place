@@ -12,6 +12,8 @@ class Customer < ApplicationRecord
 
   enum gender:{male:0,woman:1}
 
+  enum membership_status:{member:0,withdrawal:1,stop:2}
+
   def get_customer_image(width,height)
     unless customer_image.attached?
       file_path=Rails.root.join('app/assets/images/no_image.jpg')
