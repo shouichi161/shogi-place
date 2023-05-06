@@ -1,2 +1,28 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<h2>会員情報編集</h2>
+
+<%= form_with model:@customer,url:customer_path(@customer.id),method: :patch do |f| %>
+
+  <label for="image">プロフィール画像</label>
+  <%= f.file_field:customer_image,accept:"image/*",id:"image" %><br>
+
+  <label for="name">ニックネーム</label>
+  <%= f.text_field:name,id:"name" %><br>
+
+  <label for="email">メールアドレス</label>
+  <%= f.email_field:email,id:"email" %>
+
+  <p>生年月日</p>
+  <%= @customer.date_of_birth.strftime("%Y年%m月%d日") %><br>
+
+  <p>性別</p>
+  <%= Customer.genders_i18n[:"#{@customer.gender}"] %><br>
+
+  <labrl for="avility">棋力</labrl>
+  <%= f.text_field:chess_ability,id:"avility" %><br>
+
+  <label for="profile">プロフィール</label>
+  <%= f.text_area:profile,id:"profile" %><br>
+
+  <%= f.submit"変更内容を保存する" %>
+<% end %>
+  <%= link_to "退会する",'/customers/confilm' %>

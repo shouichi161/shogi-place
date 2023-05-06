@@ -9,9 +9,13 @@ class Public::CustomersController < ApplicationController
   end
 
   def edit
+    @customer=Customer.find(params[:id])
   end
 
   def update
+    @customer=Customer.find(params[:id])
+    @customer.update(customer_params)
+    redirect_to customer_path(@customer.id)
   end
 
   def confilm
@@ -19,5 +23,11 @@ class Public::CustomersController < ApplicationController
 
   def withdrawal
   end
+
+private
+
+def customer_params
+  params.require(:customer).permit(:name,:email,:date_of_birth,:gender,:chess_avility,:profile,:membership_status)
+end
 
 end
