@@ -1,2 +1,11 @@
-<h1>Public::Customers#confilm</h1>
-<p>Find me in app/views/public/customers/confilm.html.erb</p>
+<h2>退会確認</h2>
+
+<p>本当に退会しますか？<br>
+   退会するとアカウントが使用できなくなります。<br>
+   退会する場合は退会するを選んでください。</p>
+
+<%= link_to "退会しない",customer_path(current_customer.id) %>
+<%= form_with model:@customer,url:'/customers/withdrawal',method: :patch do |f| %>
+
+  <%= f.submit"退会する","data-confirm"=>"本当に退会しますか？" %>
+<% end %>
