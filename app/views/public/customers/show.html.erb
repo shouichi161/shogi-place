@@ -16,13 +16,16 @@
 <table>
   <thead>
     <tr>
-      <th>対局場名</th>
+      <th>対局場所名</th>
       <th>説明</th>
       <th></th>
     </tr>
+  </thead>
+
+  <tbody>
     <% @post_shogi_places.each do |post_shogi_place| %>
       <tr>
-        <td><%= post_shogi_place.name %></td>
+        <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
         <td><%= post_shogi_place.explanation %></td>
         <% if @customer.id==current_customer.id %>
           <td><%= link_to "編集",edit_post_shogi_place_path(post_shogi_place.id) %></td>
@@ -30,7 +33,25 @@
         <% end %>
       </tr>
     <% end %>
-  </thead>
+  </tbody>
+
 </table>
 
+<!--仮-->
 <p>お気に入り</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>都道府県</th>
+      <th>対局場所名</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tbody>
+</table>
