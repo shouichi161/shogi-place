@@ -16,8 +16,7 @@
 
   <div class="field">
     <label for="birth">生年月日</label>
-    <!--修正-->
-    <!--%= f.date_select :date_of_birth,id:"birth, use_month_numbers: true,start_year: 1920,end_year: (Time.now.year),default: Date.new(2000,1,1) %>-->
+    <%= f.date_select :date_of_birth,id:"birth",use_month_numbers: true,start_year: 1920,end_year: (Time.now.year),default: Date.new(2000,1,1) %>
   </div>
 
   <div class="field">

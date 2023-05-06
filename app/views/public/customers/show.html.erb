@@ -1,2 +1,57 @@
 <h2>会員詳細</h2>
 
+<%= image_tag @customer.get_customer_image(100,100) %>
+<%= @customer.name %>
+<%= (Date.today.strftime("%Y%m%d").to_i - @customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+
+<%= Customer.genders_i18n[:"#{@customer.gender}"] %>
+<%= @customer.chess_ability %>
+<%= @customer.profile %>
+
+<% if @customer.id==current_customer.id %>
+  <%= link_to "編集する",edit_customer_path(@customer.id) %>
+<% end %>
+
+<p>投稿履歴一覧</p>
+<table>
+  <thead>
+    <tr>
+      <th>対局場所名</th>
+      <th>説明</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_shogi_places.each do |post_shogi_place| %>
+      <tr>
+        <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
+        <td><%= post_shogi_place.explanation %></td>
+        <% if @customer.id==current_customer.id %>
+          <td><%= link_to "編集",edit_post_shogi_place_path(post_shogi_place.id) %></td>
+          <td><%= link_to "削除",post_shogi_place_path(post_shogi_place.id),method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<!--仮-->
+<p>お気に入り</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>都道府県</th>
+      <th>対局場所名</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tbody>
+</table>
