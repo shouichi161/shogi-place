@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2023_05_04_123124) do
   end
 
   create_table "prefectures", force: :cascade do |t|
-    t.string "prefecture", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

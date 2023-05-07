@@ -1,5 +1,6 @@
 class Public::PostShogiPlacesController < ApplicationController
   def new
+    @post_shogi_place=PostShogiPlace.new
   end
 
   def create

@@ -13,7 +13,7 @@ class Customer < ApplicationRecord
   enum gender:{male:0,woman:1}
   enum membership_status:{member:0,withdrawal:1,stop:2}
 
-  validates:name,length: {minimum: 1,maximum: 15}
+  validates:name,length: {minimum: 1,maximum: 15},uniqueness: true
   validates:email,presence:true
   validates:date_of_birth,presence:true
   validates:gender,presence:true
