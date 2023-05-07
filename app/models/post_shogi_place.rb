@@ -7,6 +7,16 @@ class PostShogiPlace < ApplicationRecord
 
   has_one_attached:shogi_place_image
 
+  validates:prefecture_id,presence:true
+  validates:name,presence:true
+  validates:address,presence:true
+  validates:latitude,presence:true
+  validates:longitude,presence:true
+  validates:telephone_number,presence:true
+  validates:explanation,presence:true
+  validates:target,presence:true
+  validates:activity,presence:true
+
   def get_shogi_place_image(width,height)
     unless shogi_place_image.attached?
       file_path=Rails.root.join('app/assets/images/no_image.jpg')

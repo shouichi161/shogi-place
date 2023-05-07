@@ -1,2 +1,27 @@
-<h1>Public::ShogiPlaces#new</h1>
-<p>Find me in app/views/public/shogi_places/new.html.erb</p>
+<h2>対局場所新規投稿</h2>
+
+<%= form_with model:@post_shogi_place,url:post_shogi_places_path,method: :post do |f| %>
+  <label for="name">対局場所名</label>
+  <%= f.text_field:name,id:"name" %>
+
+  <p>都道府県</p>
+  <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %><br>
+
+　<p>住所</p>
+  <label for="telephone">電話番号</label>
+  <%= f.text_field:telephone_number,id:"telephone" %>
+
+  <p>画像</p>
+  <%= f.file_field:shogi_place_image,accept:"image/*" %>
+
+  <p>対象者</p>
+
+
+  <p>活動</p>
+
+
+  <label for="explanation">説明</label>
+  <%= f.text_area:explanation,id:"explanation",placeholder:"どんなところか、雰囲気、感想などを入力してください" %>
+
+  <%= f.submit"投稿する" %>
+<% end %>
