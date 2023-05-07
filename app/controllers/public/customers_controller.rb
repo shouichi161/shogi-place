@@ -14,8 +14,12 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer=Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to customer_path(@customer.id)
+    if @customer.update(customer_params)
+      flash[:notice]="更新に成功しました"
+      redirect_to customer_path(@customer.id)
+    else
+      render:edit
+    end
   end
 
   def confilm
@@ -27,7 +31,6 @@ class Public::CustomersController < ApplicationController
     customer.update(membership_status:"withdrawal")
     reset_session
     redirect_to root_path
-
 
   end
 

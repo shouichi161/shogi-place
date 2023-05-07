@@ -11,8 +11,14 @@ class Customer < ApplicationRecord
   has_one_attached:customer_image
 
   enum gender:{male:0,woman:1}
-
   enum membership_status:{member:0,withdrawal:1,stop:2}
+
+  validates:name,length: {minimum: 1,maximum: 15}
+  validates:email,presence:true
+  validates:date_of_birth,presence:true
+  validates:gender,presence:true
+  validates:chess_ability,presence:true
+  validates:profile,length: {minimum: 1,maximum: 100}
 
   def get_customer_image(width,height)
     unless customer_image.attached?

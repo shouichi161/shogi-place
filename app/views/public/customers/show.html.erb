@@ -1,5 +1,5 @@
 <h2>会員詳細</h2>
-
+<%= @customer.membership_status %>
 <%= image_tag @customer.get_customer_image(100,100) %>
 <%= @customer.name %>
 <%= (Date.today.strftime("%Y%m%d").to_i - @customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
