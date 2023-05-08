@@ -1,2 +1,24 @@
-<h1>Public::ShogiPlaces#show</h1>
-<p>Find me in app/views/public/shogi_places/show.html.erb</p>
+<h2>対局場所詳細</h2>
+<p>住所</p>
+
+<div id="map"></div>
+
+<!-- Googleマップ表示用の Javascript -->
+<div type="text/javascript">
+  <script>
+    function initMap(){
+      let map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: <%= @post_shogi_place.latitude %>, lng: <%= @post_shogi_place.longitude %> },
+      zoom: 15
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+
+
+  <%= @post_shogi_place.customer_id %>
+  <%= @post_shogi_place.prefecture_id %>
+  <%= @post_shogi_place.name %>
+  <%= @post_shogi_place.address %>
+  <%= @post_shogi_place.latitude %>
+  <%= @post_shogi_place.longitude %>

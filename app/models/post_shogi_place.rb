@@ -5,17 +5,19 @@ class PostShogiPlace < ApplicationRecord
   belongs_to:customer
   belongs_to:prefecture
 
-  has_one_attached:shogi_place_image
+   geocoded_by :address
+   after_validation :geocode
 
-  validates:prefecture_id,presence:true
-  validates:name,presence:true
-  validates:address,presence:true
-  validates:latitude,presence:true
-  validates:longitude,presence:true
-  validates:telephone_number,presence:true
-  validates:explanation,presence:true
-  validates:target,presence:true
-  validates:activity,presence:true
+   has_one_attached:shogi_place_image
+
+   validates:prefecture_id,presence:true
+   validates:name,presence:true
+   validates:address,presence:true
+
+   validates:telephone_number,presence:true
+   validates:explanation,presence:true
+   validates:target,presence:true
+   validates:activity,presence:true
 
   def get_shogi_place_image(width,height)
     unless shogi_place_image.attached?

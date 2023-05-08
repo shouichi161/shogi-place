@@ -18,7 +18,7 @@ class Customer < ApplicationRecord
   validates:date_of_birth,presence:true
   validates:gender,presence:true
   validates:chess_ability,presence:true
-  validates:profile,length: {minimum: 1,maximum: 100}
+  validates:profile,length: {maximum: 100}
 
   def get_customer_image(width,height)
     unless customer_image.attached?

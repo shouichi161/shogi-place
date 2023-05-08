@@ -7,7 +7,10 @@
   <p>都道府県</p>
   <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %><br>
 
-　<p>住所</p>
+　<label for="address">住所</label>
+　<%= f.text_field:address,id:"address",placeholder:"住所を入力してください" %><br>
+
+
   <label for="telephone">電話番号</label>
   <%= f.text_field:telephone_number,id:"telephone" %>
 
@@ -15,13 +18,14 @@
   <%= f.file_field:shogi_place_image,accept:"image/*" %>
 
   <p>対象者</p>
-
+  <%= f.text_field:target %>
 
   <p>活動</p>
+  <%= f.text_field:activity %><br>
 
 
   <label for="explanation">説明</label>
-  <%= f.text_area:explanation,id:"explanation",placeholder:"どんなところか、雰囲気、感想などを入力してください" %>
+  <%= f.text_area:explanation,id:"explanation",placeholder:"どんなところか、雰囲気、感想などを入力してください" %><br>
 
-  <%= f.submit"投稿する" %>
+  <%= f.submit'投稿する' %>
 <% end %>
