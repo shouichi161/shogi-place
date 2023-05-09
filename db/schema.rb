@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2023_05_04_123124) do
   end
 
   create_table "activitys_tag_relations", force: :cascade do |t|
-    t.integer "shogi_place_id", null: false
+    t.integer "post_shogi_place_id", null: false
     t.integer "activity_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

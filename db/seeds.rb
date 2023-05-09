@@ -7,6 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Admin.create(email: 'a@a',password: 'aaaaaa')
 
+Activity.create([
+  {name:'自由対局'},
+  {name:'将棋教室'},
+  {name:'将棋大会'},
+  {name:'指導対局'},
+  ])
+
 Prefecture.create(name: '北海道')
 Prefecture.create(name: '青森')
 Prefecture.create(name: '秋田')

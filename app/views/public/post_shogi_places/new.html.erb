@@ -21,7 +21,15 @@
   <%= f.text_field:target %>
 
   <p>活動</p>
-  <%= f.text_field:activity %><br>
+  <%= f.text_field:activity %>
+  <%= f.collection_check_boxes(:activity_ids, Activity.all , :id, :name) do |activity| %>
+    <div>
+      <%= activity.label do %>
+        <%= activity.check_box %>
+        <%= activity.text %>
+      <% end %>
+    </div>
+  <% end %>
 
 
   <label for="explanation">説明</label>

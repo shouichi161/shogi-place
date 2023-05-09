@@ -46,3 +46,7 @@
   <%= @post_shogi_place.address %>
   <%= @post_shogi_place.latitude %>
   <%= @post_shogi_place.longitude %>
+
+  <% @post_shogi_place.activitys.each do |post_shogi_place| %>
+    <%= post_shogi_place.name %>
+  <% end %>
