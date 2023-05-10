@@ -26,7 +26,7 @@
     <% @post_shogi_places.each do |post_shogi_place| %>
       <tr>
         <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %></td>
-        <td><%= post_shogi_place.name %></td>
+        <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
         <td><%= post_shogi_place.prefecture.name %></td>
         <td><%= post_shogi_place.address %></td>
         <td><%= post_shogi_place.target %></td>
