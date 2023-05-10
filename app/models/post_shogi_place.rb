@@ -18,7 +18,6 @@ class PostShogiPlace < ApplicationRecord
    validates:telephone_number,presence:true
    validates:explanation,presence:true
    validates:target,presence:true
-   validates:activity,presence:true
 
   def get_shogi_place_image(width,height)
     unless shogi_place_image.attached?

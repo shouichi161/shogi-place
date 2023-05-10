@@ -21,7 +21,7 @@
   <%= f.text_field:target %>
 
   <p>活動</p>
-  <%= f.text_field:activity %>
+
   <%= f.collection_check_boxes(:activity_ids, Activity.all , :id, :name) do |activity| %>
     <div>
       <%= activity.label do %>
