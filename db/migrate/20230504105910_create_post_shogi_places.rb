@@ -10,7 +10,6 @@ class CreatePostShogiPlaces < ActiveRecord::Migration[6.1]
       t.string:telephone_number,null: false
       t.text:explanation,null: false
       t.integer:target,null: false
-      t.string:activity,null: false
 
       t.timestamps
     end

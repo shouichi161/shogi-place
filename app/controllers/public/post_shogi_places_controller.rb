@@ -12,6 +12,7 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def index
+    @post_shogi_places=params[:activity_id].present? ? Activity.find(params[:activity_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
   end
 
   def show
@@ -30,6 +31,6 @@ class Public::PostShogiPlacesController < ApplicationController
   private
 
   def post_shogi_place_params
-    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,:target,:activity)
+    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,:target,activity_ids: [])
   end
 end

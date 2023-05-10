@@ -2,6 +2,7 @@ class PostShogiPlace < ApplicationRecord
   has_many:favorites,dependent: :destroy
   has_many:postcomments,dependent: :destroy
   has_many:activitys_tag_relations,dependent: :destroy
+  has_many:activitys,through: :activitys_tag_relations
   belongs_to:customer
   belongs_to:prefecture
 
@@ -17,7 +18,6 @@ class PostShogiPlace < ApplicationRecord
    validates:telephone_number,presence:true
    validates:explanation,presence:true
    validates:target,presence:true
-   validates:activity,presence:true
 
   def get_shogi_place_image(width,height)
     unless shogi_place_image.attached?
