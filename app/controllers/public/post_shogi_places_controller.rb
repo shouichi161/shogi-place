@@ -16,7 +16,7 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def index
     @post_shogi_places=params[:activity_id].present? ? Activity.find(params[:activity_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
-    @tag_list=Tag.all
+    @tags=Tag.all
   end
 
   def show
@@ -30,6 +30,12 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def destroy
+  end
+
+  def search_tag
+    @tags=Tag.all
+    @tag=Tag.find(params[:tag_id])
+    @post_shogi_places=@tag.post_shogi_places.page(params[:page])
   end
 
   private

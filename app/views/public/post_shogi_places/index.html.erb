@@ -32,9 +32,9 @@
 </table>
 
 <!--タグリスト-->
-<% @tag_list.each do |tag_list| %>
-  <%=tag_list.name %>
-  <%="(#{tag_list.post_shogi_place.count})" %>
+<% @tags.each do |tag| %>
+  <%= tag.name %>
+  <%="(#{tag.post_shogi_place.count})" %>
 <% end %>
 
 

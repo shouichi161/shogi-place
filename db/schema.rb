@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 2023_05_11_114418) do
     t.float "longitude", null: false
     t.string "telephone_number", null: false
     t.text "explanation", null: false
-    t.integer "target", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
