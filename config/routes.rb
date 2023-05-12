@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources:postcomments,only:[:create,:destroy]
       resource:favorites,only:[:create,:destroy]
     end
+    
   end
 
   get 'admin'=>'admin/homes#top',as:'admin'

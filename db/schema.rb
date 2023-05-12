@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 2023_05_11_114418) do
     t.float "longitude", null: false
     t.string "telephone_number", null: false
     t.text "explanation", null: false
-    t.integer "target", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -123,6 +122,7 @@ ActiveRecord::Schema.define(version: 2023_05_11_114418) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_shogi_place_id", "tag_id"], name: "index_taggings_on_post_shogi_place_id_and_tag_id", unique: true
   end
 
   create_table "tags", force: :cascade do |t|

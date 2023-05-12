@@ -1,15 +1,5 @@
 <h2>投稿一覧</h2>
 
-<%= form_tag post_shogi_places_path, method: :get, class: 'boards__searchForm' do %>
-  <%= select_tag :activity_id,
-    options_from_collection_for_select(Activity.all, :id, :name, params[:activity_id]),
-    {
-      prompt:'タグで絞り込み検索',
-      onchange:'submit(this.from);'
-    }
-  %>
-    <% end %>
-
 <table>
   <thead>
     <tr>
@@ -24,8 +14,11 @@
 
   <tbody>
     <% @post_shogi_places.each do |post_shogi_place| %>
+
       <tr>
-        <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %></td>
+        <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %>
+          <i class="fas fa-tag"><%= post_shogi_place.tags.map(&:name).join('、') %></i>
+        </td>
         <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
         <td><%= post_shogi_place.prefecture.name %></td>
         <td><%= post_shogi_place.address %></td>
@@ -33,11 +26,16 @@
         <% post_shogi_place.activitys.each do |activity| %>
           <td><%= activity.name %></td>
         <% end %>
-
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<!--タグリスト-->
+<% @tags.each do |tag| %>
+  <%= tag.name %>
+  <%="(#{tag.post_shogi_place.count})" %>
+<% end %>
 
 
 <%= paginate @post_shogi_places %>

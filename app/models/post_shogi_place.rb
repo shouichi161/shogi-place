@@ -8,18 +8,39 @@ class PostShogiPlace < ApplicationRecord
   belongs_to:customer
   belongs_to:prefecture
 
-   geocoded_by :address
-   after_validation :geocode
+  # 住所登録時と変更時にgeocoderが緯度・経度のデータを登録・更新するのに必要
+  geocoded_by :address
+  after_validation :geocode
 
-   has_one_attached:shogi_place_image
+  has_one_attached:shogi_place_image
 
-   validates:prefecture_id,presence:true
-   validates:name,presence:true
-   validates:address,presence:true
+  validates:prefecture_id,presence:true
+  validates:name,presence:true
+  validates:address,presence:true
 
-   validates:telephone_number,presence:true
-   validates:explanation,presence:true
-   validates:target,presence:true
+  validates:telephone_number,presence:true
+  validates:explanation,presence:true
+  validates:target,presence:true
+
+  def save_tag(sent_tags)
+  # タグが存在していれば、タグの名前を配列として全て取得
+    current_tags=self.tags.pluck(:tag_name) unless self.tags.nil?
+  # 現在取得したタグから送られてきたタグを除いてoldtagとする
+    old_tags = current_tags - sent_tags
+  # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
+    new_tags = sent_tags - current_tags
+
+    #古いタグを消す
+    old_tags.each do |old|
+      self.tags.delete Tag.find_by(tag_name: old)
+    end
+
+    # 新しいタグを保存
+    new_tags.each do |new|
+      new_tagging=Tag.find_or_create_by(tag_name: new)
+      self.tags << new_tagging
+    end
+  end
 
   def get_shogi_place_image(width,height)
     unless shogi_place_image.attached?
