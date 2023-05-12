@@ -7,7 +7,6 @@
       <th>対局場所名</th>
       <th>都道府県</th>
       <th>住所</th>
-      <th>対象者</th>
       <th>活動</th>
     </tr>
   </thead>
@@ -22,7 +21,6 @@
         <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
         <td><%= post_shogi_place.prefecture.name %></td>
         <td><%= post_shogi_place.address %></td>
-        <td><%= post_shogi_place.target %></td>
         <% post_shogi_place.activitys.each do |activity| %>
           <td><%= activity.name %></td>
         <% end %>

@@ -20,7 +20,6 @@ class PostShogiPlace < ApplicationRecord
 
   validates:telephone_number,presence:true
   validates:explanation,presence:true
-  validates:target,presence:true
 
   def save_tag(sent_tags)
   # タグが存在していれば、タグの名前を配列として全て取得
@@ -32,12 +31,12 @@ class PostShogiPlace < ApplicationRecord
 
     #古いタグを消す
     old_tags.each do |old|
-      self.tags.delete Tag.find_by(tag_name: old)
+      self.tags.delete Tag.find_by(name: old)
     end
 
     # 新しいタグを保存
     new_tags.each do |new|
-      new_tagging=Tag.find_or_create_by(tag_name: new)
+      new_tagging=Tag.find_or_create_by(name: new)
       self.tags << new_tagging
     end
   end
