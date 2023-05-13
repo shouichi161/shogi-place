@@ -1,2 +1,36 @@
-<h1>Public::ShogiPlaces#edit</h1>
-<p>Find me in app/views/public/shogi_places/edit.html.erb</p>
+<h2>対局場所編集</h2>
+
+<%= form_with model:@post_shogi_place,url:post_shogi_place_path(@post_shogi_place.id),method: :patch do |f | %>
+
+  <%= f.label:name,"対局場所名" %>
+  <%= f.text_field:name %><br>
+
+  <%= f.label:prefecture,"都道府県" %>
+  <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:"#{@post_shogi_place.prefecture.name}"},{required:true} %><br>
+
+  <%= f.label:address,"住所" %>
+  <%= f.text_field:address %><br>
+
+  <%= f.label:telephone_number,"電話番号" %>
+  <%= f.text_field:telephone_number %>
+
+  <p>画像</p>
+  <%=f.file_field:shogi_place_image,accept:"image/*" %><br>
+
+　<p>タグ</p>
+
+  <%= f.label:activity,"活動" %>
+  <%= f.collection_check_boxes(:activity_ids, Activity.all , :id, :name) do |activity| %>
+    <div>
+      <%= activity.label do %>
+        <%= activity.check_box %>
+        <%= activity.text %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= f.label:explanation,"説明" %>
+  <%= f.text_area:explanation %><br>
+
+  <%= f.submit"保存する" %>
+<% end %>
