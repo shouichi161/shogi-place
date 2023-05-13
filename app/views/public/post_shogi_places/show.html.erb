@@ -37,6 +37,22 @@
       </script>
 
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+
+      <!--タグリスト-->
+      <% @tags.each do |tag| %>
+        <%= tag.name %>
+      <% end %>
+
+      <br>
+      <%= image_tag @post_shogi_place.customer.get_customer_image(80,80) %>
+      <%= @post_shogi_place.customer.name %><br>
+      <p>投稿日</p>
+      <%= @post_shogi_place.created_at.strftime("%Y年%m月%d日") %>
+
+      <% if @post_shogi_place.customer.id==current_customer.id %>
+        <%= link_to "投稿編集",edit_post_shogi_place_path(@post_shogi_place.id) %>
+        <%= link_to "投稿削除",post_shogi_place_path(@post_shogi_place.id),method: :delete,"data-confirm"=>"本当に削除しますか？" %>
+      <% end %>
     </div>
 
     <div class="col-5">
@@ -61,12 +77,4 @@
       <%= @post_shogi_place.explanation %>
     </div>
   </div>
-
-    <%= @post_shogi_place.customer_id %>
-    <%= @post_shogi_place.prefecture_id %>
-    <%= @post_shogi_place.name %>
-    <%= @post_shogi_place.address %>
-    <%= @post_shogi_place.latitude %>
-    <%= @post_shogi_place.longitude %>
-
 </div>

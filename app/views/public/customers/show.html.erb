@@ -29,7 +29,7 @@
         <td><%= post_shogi_place.explanation %></td>
         <% if @customer.id==current_customer.id %>
           <td><%= link_to "編集",edit_post_shogi_place_path(post_shogi_place.id) %></td>
-          <td><%= link_to "削除",post_shogi_place_path(post_shogi_place.id),method: :delete %></td>
+          <td><%= link_to "削除",post_shogi_place_path(post_shogi_place.id),method: :delete,"data-confirm"=>"本当に削除しますか？"  %></td>
         <% end %>
       </tr>
     <% end %>

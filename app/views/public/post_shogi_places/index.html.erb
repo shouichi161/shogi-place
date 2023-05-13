@@ -1,5 +1,15 @@
 <h2>投稿一覧</h2>
 
+<%= form_tag post_shogi_places_path, method: :get, class: 'boards__searchForm' do %>
+  <%= select_tag :activity_id,
+    options_from_collection_for_select(Activity.all, :id, :name, params[:activity_id]),
+    {
+      prompt:'タグで絞り込み検索',
+      onchange:'submit(this.from);'
+    }
+  %>
+    <% end %>
+
 <table>
   <thead>
     <tr>

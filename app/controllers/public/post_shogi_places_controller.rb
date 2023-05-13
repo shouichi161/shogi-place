@@ -21,6 +21,7 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def show
     @post_shogi_place=PostShogiPlace.find(params[:id])
+    @tags=@post_shogi_place.tags
   end
 
   def edit
@@ -30,6 +31,11 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def destroy
+    post_shogi_place=PostShogiPlace.find(params[:id])
+    post_shogi_place.destroy
+    flash[:notice]="投稿を削除しました"
+    redirect_to customer_path(current_customer.id)
+
   end
 
   def search_tag
