@@ -68,9 +68,9 @@
       <p>電話番号</p>
       <%= @post_shogi_place.telephone_number %>
 
-      <p>活動</p>
-      <% @post_shogi_place.activitys.each do |post_shogi_place| %>
-        <%= post_shogi_place.name %>
+      <p>対象者</p>
+      <% @post_shogi_place.target_audiences.each do |target_audience| %>
+        <%= target_audiences.name %>
       <% end %>
 
       <p>説明</p>

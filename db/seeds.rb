@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Admin.create(email: 'a@a',password: 'aaaaaa')
 
-Activity.create([
-  {name:'自由対局'},
-  {name:'将棋教室'},
-  {name:'将棋大会'},
-  {name:'指導対局'},
+TargetAudience.create([
+  {name:'初心者向け'},
+  {name:'有段者向け'},
+  {name:'子供向け'},
+  {name:'大人向け'},
   ])
 
 Prefecture.create(name: '北海道')

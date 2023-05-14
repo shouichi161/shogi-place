@@ -1,8 +1,8 @@
 <h2>投稿一覧</h2>
 
 <%= form_tag post_shogi_places_path, method: :get, class: 'boards__searchForm' do %>
-  <%= select_tag :activity_id,
-    options_from_collection_for_select(Activity.all, :id, :name, params[:activity_id]),
+  <%= select_tag :target_audience_id,
+    options_from_collection_for_select(TargetAudiences.all, :id, :name, params[:target_audience_id]),
     {
       prompt:'タグで絞り込み検索',
       onchange:'submit(this.from);'
@@ -17,7 +17,7 @@
       <th>対局場所名</th>
       <th>都道府県</th>
       <th>住所</th>
-      <th>活動</th>
+      <th>対象者</th>
     </tr>
   </thead>
 
@@ -31,8 +31,8 @@
         <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
         <td><%= post_shogi_place.prefecture.name %></td>
         <td><%= post_shogi_place.address %></td>
-        <% post_shogi_place.activitys.each do |activity| %>
-          <td><%= activity.name %></td>
+        <% post_shogi_place.target_audiences.each do |target_audience| %>
+          <td><%= target_audience.name %></td>
         <% end %>
       </tr>
     <% end %>

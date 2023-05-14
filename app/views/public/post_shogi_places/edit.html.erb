@@ -19,12 +19,12 @@
 
 　<p>タグ</p>
 
-  <%= f.label:activity,"活動" %>
-  <%= f.collection_check_boxes(:activity_ids, Activity.all , :id, :name) do |activity| %>
+  <%= f.label:target_audience,"対象者" %>
+  <%= f.collection_check_boxes(:target_audience_ids, TargetAudiences.all , :id, :name) do |target_audience| %>
     <div>
-      <%= activity.label do %>
-        <%= activity.check_box %>
-        <%= activity.text %>
+      <%= target_audience.label do %>
+        <%= target_audience.check_box %>
+        <%= target_audience.text %>
       <% end %>
     </div>
   <% end %>

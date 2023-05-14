@@ -15,7 +15,7 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def index
-    @post_shogi_places=params[:activity_id].present? ? Activity.find(params[:activity_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
+    @post_shogi_places=params[:target_audience_id].present? ? TargetAudiences.find(params[:target_audiences_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
     @tags=Tag.all
   end
 
@@ -51,7 +51,7 @@ class Public::PostShogiPlacesController < ApplicationController
   private
 
   def post_shogi_place_params
-    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,tags_attributes: [:name],activity_ids: [])
+    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,tags_attributes: [:name],target_audience_ids: [])
   end
 
 end
