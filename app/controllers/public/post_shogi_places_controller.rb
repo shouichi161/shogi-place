@@ -15,7 +15,7 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def index
-    @post_shogi_places=params[:target_audience_id].present? ? TargetAudiences.find(params[:target_audiences_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
+    @post_shogi_places=params[:target_audience_id].present? ? TargetAudience.find(params[:target_audiences_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
     @tags=Tag.all
   end
 

@@ -20,7 +20,7 @@
 　<p>タグ</p>
 
   <%= f.label:target_audience,"対象者" %>
-  <%= f.collection_check_boxes(:target_audience_ids, TargetAudiences.all , :id, :name) do |target_audience| %>
+  <%= f.collection_check_boxes(:target_audience_ids, TargetAudience.all , :id, :name) do |target_audience| %>
     <div>
       <%= target_audience.label do %>
         <%= target_audience.check_box %>

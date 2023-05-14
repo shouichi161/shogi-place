@@ -22,7 +22,7 @@
 
   <p>対象者</p>
 
-  <%= f.collection_check_boxes(:target_audience_ids, TargetAudiences.all , :id, :name) do |target_audience| %>
+  <%= f.collection_check_boxes(:target_audience_ids, TargetAudience.all , :id, :name) do |target_audience| %>
     <div>
       <%= target_audience.label do %>
         <%= target_audience.check_box %>
