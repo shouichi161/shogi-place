@@ -1,12 +1,5 @@
-<h2>投稿一覧</h2>
+<h2>タグが<%= "#{@tag.name}" %>の投稿一覧</h2>
 
-<!--タグリスト-->
-<% @tags.each do |tag| %>
-  <%= tag.name %>
-  <%= "(#{tag.past_shogi_place.count})" %>
-<% end %>
-
-<p>タグが"#{@tag.tag_name}"の投稿一覧</p>
 
   <table>
   <thead>
@@ -15,7 +8,7 @@
       <th>対局場所名</th>
       <th>都道府県</th>
       <th>住所</th>
-      <th>活動</th>
+      <th>対象者</th>
     </tr>
   </thead>
 
@@ -28,11 +21,17 @@
         <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
         <td><%= post_shogi_place.prefecture.name %></td>
         <td><%= post_shogi_place.address %></td>
-        <% post_shogi_place.activitys.each do |activity| %>
-          <td><%= activity.name %></td>
+        <% post_shogi_place.target_audiences.each do |target_audience| %>
+          <td><%= target_audience.name %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<!--タグリスト-->
+<% @tags.each do |tag| %>
+  <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
+  <%= "(#{tag.post_shogi_place.count})" %>
 <% end %>
+

@@ -1,8 +1,8 @@
 class PostShogiPlace < ApplicationRecord
   has_many:favorites,               dependent: :destroy
   has_many:postcomments,            dependent: :destroy
-  has_many:activitys_tag_relations, dependent: :destroy
-  has_many:activitys,               through: :activitys_tag_relations
+  has_many:target_audiences_tag_relations, dependent: :destroy
+  has_many:target_audiences,        through: :target_audiences_tag_relations
   has_many:taggings,                dependent: :destroy
   has_many:tags,                    through: :taggings
   belongs_to:customer
@@ -17,7 +17,6 @@ class PostShogiPlace < ApplicationRecord
   validates:prefecture_id,presence:true
   validates:name,presence:true
   validates:address,presence:true
-
   validates:telephone_number,presence:true
   validates:explanation,presence:true
 

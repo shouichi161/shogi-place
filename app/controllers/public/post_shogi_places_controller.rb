@@ -15,7 +15,7 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def index
-    @post_shogi_places=params[:activity_id].present? ? Activity.find(params[:activity_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
+    @post_shogi_places=params[:target_audience_id].present? ? TargetAudience.find(params[:target_audience_id]).post_shogi_places.page(params[:page]) : PostShogiPlace.page(params[:page])
     @tags=Tag.all
   end
 
@@ -25,9 +25,13 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def edit
+    @post_shogi_place=PostShogiPlace.find(params[:id])
   end
 
   def update
+    @post_shogi_place=PostShogiPlace.find(params[:id])
+    @post_shogi_place.update(post_shogi_place_params)
+    redirect_to post_shogi_place_path(@post_shogi_place.id)
   end
 
   def destroy
@@ -41,13 +45,13 @@ class Public::PostShogiPlacesController < ApplicationController
   def search_tag
     @tags=Tag.all
     @tag=Tag.find(params[:tag_id])
-    @post_shogi_places=@tag.post_shogi_places.page(params[:page])
+    @post_shogi_places=@tag.post_shogi_place.page(params[:page])
   end
 
   private
 
   def post_shogi_place_params
-    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,:target,tags_attributes: [:name],activity_ids: [])
+    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,tags_attributes: [:name],target_audience_ids: [])
   end
 
 end

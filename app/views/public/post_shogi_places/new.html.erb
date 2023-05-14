@@ -20,13 +20,13 @@
   <p>、で区切ることで複数のタグをつけることができます</p>
   <%= f.text_field:tag_name %>
 
-  <p>活動</p>
+  <p>対象者</p>
 
-  <%= f.collection_check_boxes(:activity_ids, Activity.all , :id, :name) do |activity| %>
+  <%= f.collection_check_boxes(:target_audience_ids, TargetAudience.all , :id, :name) do |target_audience| %>
     <div>
-      <%= activity.label do %>
-        <%= activity.check_box %>
-        <%= activity.text %>
+      <%= target_audience.label do %>
+        <%= target_audience.check_box %>
+        <%= target_audience.text %>
       <% end %>
     </div>
   <% end %>
