@@ -26,11 +26,14 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def edit
     @post_shogi_place=PostShogiPlace.find(params[:id])
+    @tag_list=@post_shogi_place.tags.pluck(:name).join('、')
   end
 
   def update
     @post_shogi_place=PostShogiPlace.find(params[:id])
+    tag_list=params[:post_shogi_place][:tag_name].split('、')
     @post_shogi_place.update(post_shogi_place_params)
+    @post_shogi_place.save_tag(tag_list)
     redirect_to post_shogi_place_path(@post_shogi_place.id)
   end
 

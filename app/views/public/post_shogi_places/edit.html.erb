@@ -18,6 +18,8 @@
   <%=f.file_field:shogi_place_image,accept:"image/*" %><br>
 
 　<p>タグ</p>
+　<p>、で区切ると複数タグ登録ができます</p>
+　<%= f.text_field :tag_name,value:@tag_list %><br>
 
   <%= f.label:target_audience,"対象者" %>
   <%= f.collection_check_boxes(:target_audience_ids, TargetAudience.all , :id, :name) do |target_audience| %>
@@ -34,3 +36,4 @@
 
   <%= f.submit"保存する" %>
 <% end %>
+
