@@ -45,7 +45,7 @@ class Public::PostShogiPlacesController < ApplicationController
   def search_tag
     @tags=Tag.all
     @tag=Tag.find(params[:tag_id])
-    @post_shogi_places=@tag.post_shogi_places.page(params[:page])
+    @post_shogi_places=@tag.post_shogi_place.page(params[:page])
   end
 
   private
