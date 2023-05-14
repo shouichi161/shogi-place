@@ -2,7 +2,7 @@
 
 <%= form_tag post_shogi_places_path, method: :get, class: 'boards__searchForm' do %>
   <%= select_tag :target_audience_id,
-    options_from_collection_for_select(TargetAudiences.all, :id, :name, params[:target_audience_id]),
+    options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]),
     {
       prompt:'タグで絞り込み検索',
       onchange:'submit(this.from);'
