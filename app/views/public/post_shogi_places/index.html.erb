@@ -41,8 +41,10 @@
 
 <!--タグリスト-->
 <% @tags.each do |tag| %>
-  <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
-  <%= "(#{tag.post_shogi_place.count})" %>
+　<% unless tag.post_shogi_place.count==0 %>
+    <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
+    <%= "(#{tag.post_shogi_place.count})" %>
+  <% end %>
 <% end %>
 
 
