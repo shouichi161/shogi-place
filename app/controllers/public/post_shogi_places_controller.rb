@@ -25,6 +25,8 @@ class Public::PostShogiPlacesController < ApplicationController
   def show
     @post_shogi_place=PostShogiPlace.find(params[:id])
     @tags=@post_shogi_place.tags
+    @postcomments=@post_shogi_place.postcomments.all
+    @postcomment=Postcomment.new
   end
 
   def edit
