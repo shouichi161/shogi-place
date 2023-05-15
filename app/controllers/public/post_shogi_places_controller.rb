@@ -8,10 +8,13 @@ class Public::PostShogiPlacesController < ApplicationController
     @post_shogi_place.customer_id=current_customer.id
     # 受け取った値を、で区切って配列にする
     tag_list=params[:post_shogi_place][:tag_name].split('、')
-    @post_shogi_place.save
-    @post_shogi_place.save_tag(tag_list)
-    redirect_to post_shogi_place_path(@post_shogi_place.id)
-
+    if @post_shogi_place.save
+       @post_shogi_place.save_tag(tag_list)
+       flash[:notice]="投稿に成功しました"
+       redirect_to post_shogi_place_path(@post_shogi_place.id)
+    else
+      render:new
+    end
   end
 
   def index
@@ -31,14 +34,22 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def update
     @post_shogi_place=PostShogiPlace.find(params[:id])
+    # 入力されたタグを受け取る
     tag_list=params[:post_shogi_place][:tag_name].split('、')
-    @post_shogi_place.update(post_shogi_place_params)
-    @old_relations=Tagging.where(post_shogi_place_id: @post_shogi_place.id)
-    @old_relations.each do |relation|
-      relation.delete
+    if @post_shogi_place.update(post_shogi_place_params)
+      # このpost_shogi_place_idに紐づいていたタグを@oldに入れる
+       @old_relations=Tagging.where(post_shogi_place_id: @post_shogi_place.id)
+      # @oldの中身を取り出し、消す
+       @old_relations.each do |relation|
+         relation.delete
+       end
+       @post_shogi_place.save_tag(tag_list)
+       flash[:notice]="更新に成功しました"
+       redirect_to post_shogi_place_path(@post_shogi_place.id)
+    else
+      @tag_list=@post_shogi_place.tags.pluck(:name).join('、')
+      render:edit
     end
-    @post_shogi_place.save_tag(tag_list)
-    redirect_to post_shogi_place_path(@post_shogi_place.id)
   end
 
   def destroy

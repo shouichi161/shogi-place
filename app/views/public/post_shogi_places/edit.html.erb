@@ -1,5 +1,14 @@
 <h2>対局場所編集</h2>
 
+<% if @post_shogi_place.errors.any? %>
+  <%= @post_shogi_place.errors.count %>件のエラーが発生しました。
+  <% @post_shogi_place.errors.full_messages.each do |message| %>
+    <ul>
+      <li><%= message %></li>
+    </ul>
+  <% end %>
+<% end %>
+
 <%= form_with model:@post_shogi_place,url:post_shogi_place_path(@post_shogi_place.id),method: :patch do |f | %>
 
   <%= f.label:name,"対局場所名" %>
