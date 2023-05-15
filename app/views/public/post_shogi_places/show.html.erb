@@ -4,7 +4,35 @@
 
   <div class="row">
     <div class="col-5">
-      <!-- Googleマップ表示エリア(地図を表示) -->
+      <%= image_tag @post_shogi_place.get_shogi_place_image(200,200) %>
+      <!--タグリスト-->
+      <% @tags.each do |tag| %>
+        <%= tag.name %>
+      <% end %>
+
+      <br>
+      <%= image_tag @post_shogi_place.customer.get_customer_image(80,80) %>
+      <%= link_to @post_shogi_place.customer.name,customer_path(@post_shogi_place.customer.id) %><br>
+      <p>投稿日</p>
+      <%= @post_shogi_place.created_at.strftime("%Y年%m月%d日") %>
+
+      <% if @post_shogi_place.customer.id==current_customer.id %>
+        <%= link_to "投稿編集",edit_post_shogi_place_path(@post_shogi_place.id) %>
+        <%= link_to "投稿削除",post_shogi_place_path(@post_shogi_place.id),method: :delete,"data-confirm"=>"本当に削除しますか？" %>
+      <% end %>
+    </div>
+
+    <div class="col-5">
+      <p>対局場所名</p>
+      <%= @post_shogi_place.name %>
+
+      <p>場所</p>
+      <%= @post_shogi_place.prefecture.name %>
+
+      <p>住所</p>
+      <%= @post_shogi_place.address %>
+
+       <!-- Googleマップ表示エリア(地図を表示) -->
       <div style="width:400px; height:400px;" id="map"></div>
 
       <!-- Googleマップ表示用の Javascript -->
@@ -38,32 +66,6 @@
 
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
 
-      <!--タグリスト-->
-      <% @tags.each do |tag| %>
-        <%= tag.name %>
-      <% end %>
-
-      <br>
-      <%= image_tag @post_shogi_place.customer.get_customer_image(80,80) %>
-      <%= @post_shogi_place.customer.name %><br>
-      <p>投稿日</p>
-      <%= @post_shogi_place.created_at.strftime("%Y年%m月%d日") %>
-
-      <% if @post_shogi_place.customer.id==current_customer.id %>
-        <%= link_to "投稿編集",edit_post_shogi_place_path(@post_shogi_place.id) %>
-        <%= link_to "投稿削除",post_shogi_place_path(@post_shogi_place.id),method: :delete,"data-confirm"=>"本当に削除しますか？" %>
-      <% end %>
-    </div>
-
-    <div class="col-5">
-      <p>対局場所名</p>
-      <%= @post_shogi_place.name %>
-
-      <p>場所</p>
-      <%= @post_shogi_place.prefecture.name %>
-
-      <p>住所</p>
-      <%= @post_shogi_place.address %>
 
       <p>電話番号</p>
       <%= @post_shogi_place.telephone_number %>
@@ -78,3 +80,5 @@
     </div>
   </div>
 </div>
+
+

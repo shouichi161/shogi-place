@@ -8,10 +8,13 @@ class Public::PostShogiPlacesController < ApplicationController
     @post_shogi_place.customer_id=current_customer.id
     # 受け取った値を、で区切って配列にする
     tag_list=params[:post_shogi_place][:tag_name].split('、')
-    @post_shogi_place.save
-    @post_shogi_place.save_tag(tag_list)
-    redirect_to post_shogi_place_path(@post_shogi_place.id)
-
+    if @post_shogi_place.save
+       @post_shogi_place.save_tag(tag_list)
+       flash[:notice]="投稿に成功しました"
+       redirect_to post_shogi_place_path(@post_shogi_place.id)
+    else
+      render:new
+    end
   end
 
   def index
@@ -26,12 +29,27 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def edit
     @post_shogi_place=PostShogiPlace.find(params[:id])
+    @tag_list=@post_shogi_place.tags.pluck(:name).join('、')
   end
 
   def update
     @post_shogi_place=PostShogiPlace.find(params[:id])
-    @post_shogi_place.update(post_shogi_place_params)
-    redirect_to post_shogi_place_path(@post_shogi_place.id)
+    # 入力されたタグを受け取る
+    tag_list=params[:post_shogi_place][:tag_name].split('、')
+    if @post_shogi_place.update(post_shogi_place_params)
+      # このpost_shogi_place_idに紐づいていたタグを@oldに入れる
+       @old_relations=Tagging.where(post_shogi_place_id: @post_shogi_place.id)
+      # @oldの中身を取り出し、消す
+       @old_relations.each do |relation|
+         relation.delete
+       end
+       @post_shogi_place.save_tag(tag_list)
+       flash[:notice]="更新に成功しました"
+       redirect_to post_shogi_place_path(@post_shogi_place.id)
+    else
+      @tag_list=@post_shogi_place.tags.pluck(:name).join('、')
+      render:edit
+    end
   end
 
   def destroy
@@ -51,7 +69,7 @@ class Public::PostShogiPlacesController < ApplicationController
   private
 
   def post_shogi_place_params
-    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,tags_attributes: [:name],target_audience_ids: [])
+    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,:shogi_place_image,tags_attributes: [:name],target_audience_ids: [])
   end
 
 end
