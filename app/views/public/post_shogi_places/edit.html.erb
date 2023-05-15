@@ -15,7 +15,7 @@
   <%= f.text_field:name %><br>
 
   <%= f.label:prefecture,"都道府県" %>
-  <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:"#{@post_shogi_place.prefecture.name}"},{required:true} %><br>
+  <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{},{required:true} %><br>
 
   <%= f.label:address,"住所" %>
   <%= f.text_field:address %><br>
