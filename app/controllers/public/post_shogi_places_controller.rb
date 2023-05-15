@@ -69,7 +69,7 @@ class Public::PostShogiPlacesController < ApplicationController
   private
 
   def post_shogi_place_params
-    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,tags_attributes: [:name],target_audience_ids: [])
+    params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,:shogi_place_image,tags_attributes: [:name],target_audience_ids: [])
   end
 
 end
