@@ -40,6 +40,11 @@ class PostShogiPlace < ApplicationRecord
     end
   end
 
+  # いいねをクリックしたcustomerのidがfavoritesテーブルに存在するかどうかを調べる
+  def favorited_by?(customer)
+    favorites.exists?(customer_id:customer.id)
+  end
+
   def get_shogi_place_image(width,height)
     unless shogi_place_image.attached?
       file_path=Rails.root.join('app/assets/images/no_image.jpg')
