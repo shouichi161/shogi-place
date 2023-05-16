@@ -27,6 +27,20 @@
       <%= @post_shogi_place.created_at.strftime("%Y年%m月%d日") %>
 
       <%= "コメント数"+"#{@postcomments.count}" %>
+      <% if @post_shogi_place.favorited_by?(current_customer) %>
+        <p>
+          <%= link_to post_shogi_place_favorites_path(@post_shogi_place),method: :delete do %>
+          ❤<%=@post_shogi_place.favorites.count%>いいね
+          <% end %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to post_shogi_place_favorites_path(@post_shogi_place),method: :post do %>
+          ♡<%= @post_shogi_place.favorites.count %>いいね
+          <% end %>
+        </p>
+      <% end %>
+
 
       <% if @post_shogi_place.customer.id==current_customer.id %>
         <%= link_to "投稿編集",edit_post_shogi_place_path(@post_shogi_place.id) %>
@@ -92,7 +106,6 @@
     </div>
   </div>
 </div>
-
 
 <%= @postcomments.count %>件のコメント
 
