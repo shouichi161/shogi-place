@@ -2,6 +2,16 @@
 
   <h2>対局場所詳細</h2>
 
+  <% if @postcomment.errors.any? %>
+    <%= @postcomment.errors.count %>件のエラーが発生しました
+    <% @postcomment.errors.full_messages.each do |message| %>
+      <ul>
+        <li><%= message %></li>
+      </ul>
+    <% end %>
+  <% end %>
+
+
   <div class="row">
     <div class="col-5">
       <%= image_tag @post_shogi_place.get_shogi_place_image(200,200) %>
