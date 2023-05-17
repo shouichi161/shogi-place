@@ -26,7 +26,7 @@
       <p>投稿日</p>
       <%= @post_shogi_place.created_at.strftime("%Y年%m月%d日") %>
 
-      <%= "コメント数"+"#{@postcomments.count}" %>
+      <%= "コメント数"+"#{@post_shogi_place.postcomments.count}" %>
       <% if @post_shogi_place.favorited_by?(current_customer) %>
         <p>
           <%= link_to post_shogi_place_favorites_path(@post_shogi_place),method: :delete do %>
@@ -107,7 +107,7 @@
   </div>
 </div>
 
-<%= @postcomments.count %>件のコメント
+<%= @post_shogi_place.postcomments.count %>件のコメント
 
 <table>
   <thead>
@@ -131,9 +131,9 @@
       </tr>
     <% end %>
   </tbody>
-
 </table>
 
+<%= paginate @postcomments %>
 <p>コメントする</p>
 
 <%= form_with model:[@post_shogi_place,@postcomment] do |f| %>
