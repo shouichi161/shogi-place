@@ -6,6 +6,7 @@ class Public::CustomersController < ApplicationController
   def show
     @customer=Customer.find(params[:id])
     @post_shogi_places=@customer.post_shogi_places
+    @favorites=@customer.favorites
   end
 
   def edit

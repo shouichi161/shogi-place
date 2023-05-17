@@ -1,12 +1,13 @@
 <h2>会員詳細</h2>
 <%= @customer.membership_status %>
 <%= image_tag @customer.get_customer_image(100,100) %>
-<%= @customer.name %>
-<%= (Date.today.strftime("%Y%m%d").to_i - @customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+<p>ニックネーム　<%= @customer.name %></p>
+<p>年齢　<%= (Date.today.strftime("%Y%m%d").to_i - @customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+</p>
 
-<%= Customer.genders_i18n[:"#{@customer.gender}"] %>
-<%= @customer.chess_ability %>
-<%= @customer.profile %>
+<p>性別　<%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
+<p>棋力　<%= @customer.chess_ability %></p>
+<p>プロフィール　<%= @customer.profile %></p>
 
 <% if @customer.id==current_customer.id %>
   <%= link_to "編集する",edit_customer_path(@customer.id) %>
@@ -38,20 +39,24 @@
 </table>
 
 <!--仮-->
-<p>お気に入り</p>
+<p>お気に入り（いいねをした投稿一覧）</p>
 
 <table>
   <thead>
     <tr>
-      <th>都道府県</th>
+      <th>画像</th>
       <th>対局場所名</th>
       <th>説明</th>
     </tr>
   </thead>
 
   <tbody>
-    <td></td>
-    <td></td>
-    <td></td>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td><%= image_tag favorite.post_shogi_place.get_shogi_place_image(80,80) %></td>
+        <td><%= link_to favorite.post_shogi_place.name,post_shogi_place_path(favorite.post_shogi_place.id) %></td>
+        <td><%= favorite.post_shogi_place.explanation %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
