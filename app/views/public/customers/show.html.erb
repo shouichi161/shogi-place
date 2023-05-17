@@ -35,10 +35,9 @@
       </tr>
     <% end %>
   </tbody>
-
 </table>
+<%= paginate @post_shogi_places %>
 
-<!--仮-->
 <p>お気に入り（いいねをした投稿一覧）</p>
 
 <table>
@@ -60,3 +59,4 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @favorites %>
