@@ -17,8 +17,9 @@
       <tr>
         <td><%= image_tag customer.get_customer_image(80,80) %></td>
         <td><%= link_to customer.name,customer_path(customer.id) %></td>
-        <td><%= (Date.today.strftime("%Y%m%d").to_i - customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳 </td>
-        <td><%= customer.gender %></td>
+        <td><%= (Date.today.strftime("%Y%m%d").to_i - customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+        </td>
+        <td><%= Customer.genders_i18n[:"#{customer.gender}"] %></td>
         <td><%= customer.chess_ability %></td>
         <td><%= customer.profile %></td>
 

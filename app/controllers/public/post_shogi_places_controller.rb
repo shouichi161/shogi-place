@@ -13,7 +13,7 @@ class Public::PostShogiPlacesController < ApplicationController
        flash[:notice]="投稿に成功しました"
        redirect_to post_shogi_place_path(@post_shogi_place.id)
     else
-      render:new
+       render:new
     end
   end
 
@@ -39,7 +39,7 @@ class Public::PostShogiPlacesController < ApplicationController
     # 入力されたタグを受け取る
     tag_list=params[:post_shogi_place][:tag_name].split('、')
     if @post_shogi_place.update(post_shogi_place_params)
-      # このpost_shogi_place_idに紐づいていたタグを@oldに入れる
+      # @post_shogi_place_idに紐づいていたタグを@oldに入れる
        @old_relations=Tagging.where(post_shogi_place_id: @post_shogi_place.id)
       # @oldの中身を取り出し、消す
        @old_relations.each do |relation|
