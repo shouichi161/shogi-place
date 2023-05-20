@@ -20,6 +20,18 @@ class Customer < ApplicationRecord
   validates:chess_ability,presence:true
   validates:profile,length: {maximum: 100}
 
+  # ゲストログイン用のニックネーム、パスワード設定の記述
+  def self.guest
+    find_or_create_by!(name: 'ゲストユーザー') do |customer|
+      customer.password=SecureRandom.urlsafe_base64
+      customer.email='aaa@aaa.com'
+      customer.date_of_birth='2000-01-01'
+      customer.gender='male'
+      customer.chess_ability='初心者'
+    end
+  end
+
+
   def get_customer_image(width,height)
     unless customer_image.attached?
       file_path=Rails.root.join('app/assets/images/no_image.jpg')
