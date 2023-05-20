@@ -1,4 +1,6 @@
 class Public::CustomersController < ApplicationController
+  before_action :ensure_normal_customer,only: [:update,:withdrawal]
+
   def index
     @customers=Customer.page(params[:page])
   end
@@ -31,13 +33,22 @@ class Public::CustomersController < ApplicationController
     customer=Customer.find(current_customer.id)
     customer.update(membership_status:"withdrawal")
     reset_session
+    flash[:notice]="退会しました。"
     redirect_to root_path
   end
 
-private
+  # ゲストユーザーはユーザー情報の更新、退会をできなくする
+  def ensure_normal_customer
+    if current_customer.name=='ゲストユーザー'
+      flash[:notice]="ゲストユーザーの更新・退会はできません"
+      redirect_to root_path
+    end
+  end
 
-def customer_params
-  params.require(:customer).permit(:name,:email,:date_of_birth,:gender,:chess_ability,:profile,:membership_status,:customer_image)
-end
+  private
+
+  def customer_params
+    params.require(:customer).permit(:name,:email,:date_of_birth,:gender,:chess_ability,:profile,:membership_status,:customer_image)
+  end
 
 end
