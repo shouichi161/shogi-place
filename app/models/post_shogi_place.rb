@@ -40,6 +40,21 @@ class PostShogiPlace < ApplicationRecord
     end
   end
 
+  # キーワード検索方法分岐
+  def self.looks(search,word)
+    if search=="perfect_match"
+      @post_shogi_place=PostShogiPlace.where("explanation LIKE?","#{word}")
+    elsif search=="forward_match"
+      @post_shogi_place=PostShogiPlace.where("explanation LIKE?","#{word}%")
+    elsif search=="backward_match"
+      @post_shogi_place=PostShogiPlace.where("explanation LIKE?","%#{word}")
+    elsif search=="partial_match"
+      @post_shogi_place=PostShogiPlace.where("explanation LIKE?","%#{word}%")
+    else
+      @post_shogi_place=PostShogiPlace.all
+    end
+  end
+
   # いいねをクリックしたcustomerのidがfavoritesテーブルに存在するかどうかを調べる
   def favorited_by?(customer)
     favorites.exists?(customer_id:customer.id)
