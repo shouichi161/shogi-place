@@ -32,7 +32,6 @@ class Public::CustomersController < ApplicationController
     customer.update(membership_status:"withdrawal")
     reset_session
     redirect_to root_path
-
   end
 
 private
