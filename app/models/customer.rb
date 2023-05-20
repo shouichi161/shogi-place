@@ -20,7 +20,7 @@ class Customer < ApplicationRecord
   validates:chess_ability,presence:true
   validates:profile,length: {maximum: 100}
 
-  # ゲストログイン用のニックネーム、パスワード設定の記述
+  # ゲストログイン用のニックネーム、パスワード等の設定の記述
   def self.guest
     find_or_create_by!(name: 'ゲストユーザー') do |customer|
       customer.password=SecureRandom.urlsafe_base64

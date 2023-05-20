@@ -40,6 +40,7 @@ class Public::SessionsController < Devise::SessionsController
     return if !@customer
 
     if @customer.valid_password?(params[:customer][:password]) && !(@customer.membership_status=="member")
+      flash[:notice]="退会済みなのでログインできません。"
       redirect_to new_customer_registration_path
     end
   end
