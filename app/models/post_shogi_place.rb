@@ -41,8 +41,12 @@ class PostShogiPlace < ApplicationRecord
   end
 
   # キーワード検索方法分岐
-  def self.looks(word)
-      @post_shogi_place=PostShogiPlace.where("explanation LIKE?","%#{word}%")
+  def self.looks(range,word)
+    if range=="対局場所名"
+       @post_shogi_place=PostShogiPlace.where("name LIKE?","%#{word}%")
+    else
+       @post_shogi_place=PostShogiPlace.where("explanation LIKE?","%#{word}%")
+    end
   end
 
   # いいねをクリックしたcustomerのidがfavoritesテーブルに存在するかどうかを調べる
