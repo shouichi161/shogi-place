@@ -68,6 +68,10 @@ class Public::PostShogiPlacesController < ApplicationController
     @post_shogi_places=@tag.post_shogi_place.page(params[:page])
   end
 
+  def search_keyword
+    @post_shogi_places=PostShogiPlace.looks(params[:range],params[:word])
+  end
+
   private
 
   def post_shogi_place_params

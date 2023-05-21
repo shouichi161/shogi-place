@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       resource:favorites,only:[:create,:destroy]
     end
     get "search_tag"=>"post_shogi_places#search_tag"
+    get 'search_keyword'=>'post_shogi_places#search_keyword'
   end
 
   get 'admin'=>'admin/homes#top',as:'admin'
