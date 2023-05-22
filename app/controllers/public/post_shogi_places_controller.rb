@@ -72,6 +72,11 @@ class Public::PostShogiPlacesController < ApplicationController
     @post_shogi_places=PostShogiPlace.looks(params[:range],params[:word])
   end
 
+  def multi_criteria_search
+      #修正
+      @post_shogi_places=PostShogiPlace.joins(:target_audience).where('post_shogi_places.prefecture_id="#{params[:prefecture_id]}" AND target_audiences.id="#{params[:target_audience_id]}"')
+  end
+
   private
 
   def post_shogi_place_params

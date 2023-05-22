@@ -24,11 +24,15 @@ Rails.application.routes.draw do
       end
     end
     resources:post_shogi_places do
+      collection do
+
+      end
       resources:postcomments,only:[:create,:destroy]
       resource:favorites,only:[:create,:destroy]
     end
     get "search_tag"=>"post_shogi_places#search_tag"
     get 'search_keyword'=>'post_shogi_places#search_keyword'
+    get 'multi_criteria_search'=>'post_shogi_places#multi_criteria_search'
   end
 
   get 'admin'=>'admin/homes#top',as:'admin'
