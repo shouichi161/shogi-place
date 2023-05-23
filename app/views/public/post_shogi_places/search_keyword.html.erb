@@ -5,21 +5,21 @@
     <tr>
       <th>画像</th>
       <th>対局場所名</th>
-      <th>都道府県</th>
       <th>住所</th>
+      <th>説明</th>
       <th>対象者</th>
     </tr>
   </thead>
 
   <tbody>
     <% @post_shogi_places.each do |post_shogi_place| %>
+
       <tr>
         <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %>
-          <i class="fas fa-tag"><%= post_shogi_place.tags.map(&:name).join('、') %></i>
         </td>
         <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
-        <td><%= post_shogi_place.prefecture.name %></td>
         <td><%= post_shogi_place.address %></td>
+        <td><%= post_shogi_place.explanation %></td>
         <% post_shogi_place.target_audiences.each do |target_audience| %>
           <td><%= target_audience.name %></td>
         <% end %>
@@ -27,3 +27,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= link_to "投稿一覧へ戻る",post_shogi_places_path %>

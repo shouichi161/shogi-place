@@ -45,7 +45,7 @@ class PostShogiPlace < ApplicationRecord
     if range=="対局場所名"
        @post_shogi_place=PostShogiPlace.where("name LIKE?","%#{word}%")
     else
-       @post_shogi_place=PostShogiPlace.where("explanation LIKE?","%#{word}%")
+       @post_shogi_place=PostShogiPlace.where("address LIKE?","%#{word}%")
     end
   end
 
