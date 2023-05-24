@@ -26,11 +26,21 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+
+
   def guest_sign_in
     customer=Customer.guest
     sign_in customer
     flash[:notice]="ゲストユーザーとしてログインしました。"
-    redirect_to root_path
+    redirect_to post_shogi_places_path
+  end
+
+  def after_sign_in_path_for(resource)
+    post_shogi_places_path
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
   end
 
   protected
