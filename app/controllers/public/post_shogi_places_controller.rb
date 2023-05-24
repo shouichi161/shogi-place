@@ -73,7 +73,9 @@ class Public::PostShogiPlacesController < ApplicationController
   end
 
   def multi_criteria_search
-      @post_shogi_places=PostShogiPlace.joins(:target_audiences).where("post_shogi_places.prefecture_id LIKE ? AND target_audiences.id LIKE ?","#{params[:prefecture_id]}","#{params[:target_audience_id]}")
+    @prefecture=Prefecture.find(params[:prefecture_id])
+    @target_audience=TargetAudience.find(params[:target_audience_id])
+    @post_shogi_places=PostShogiPlace.joins(:target_audiences).where("post_shogi_places.prefecture_id LIKE ? AND target_audiences.id LIKE ?","#{params[:prefecture_id]}","#{params[:target_audience_id]}")
   end
 
   private
