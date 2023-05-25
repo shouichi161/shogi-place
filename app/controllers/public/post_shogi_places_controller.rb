@@ -1,4 +1,5 @@
 class Public::PostShogiPlacesController < ApplicationController
+  before_action:is_matching_login_customer,only:[:edit,:update,:destroy]
   def new
     @post_shogi_place=PostShogiPlace.new
   end
@@ -82,6 +83,14 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def post_shogi_place_params
     params.require(:post_shogi_place).permit(:customer_id,:prefecture_id,:name,:address,:latitude,:longiture,:telephone_number,:explanation,:shogi_place_image,tags_attributes: [:name],target_audience_ids: [])
+  end
+
+
+  def is_matching_login_customer
+    post_shogi_place=PostShogiPlace.find(params[:id])
+    unless post_shogi_place.customer.id==current_customer.id
+      redirect_to post_shogi_places_path
+    end
   end
 
 end

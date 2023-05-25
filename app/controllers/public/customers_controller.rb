@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :ensure_normal_customer,only: [:update,:withdrawal]
+  before_action :is_matching_login_customer,only:[:edit,:update]
 
   def index
     @customers=Customer.page(params[:page])
@@ -51,4 +52,10 @@ class Public::CustomersController < ApplicationController
     params.require(:customer).permit(:name,:email,:date_of_birth,:gender,:chess_ability,:profile,:membership_status,:customer_image)
   end
 
+  def is_matching_login_customer
+    customer=Customer.find(params[:id])
+    unless customer.id==current_customer.id
+    redirect_to customers_path
+    end
+  end
 end
