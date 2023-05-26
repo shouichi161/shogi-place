@@ -24,10 +24,3 @@
 <% end %>
 
 <%= render "admin/shared/links" %>
-
-<% Admin.all.each do |a| %>
-<%= a.email %>
-<%= a.encrypted_password %>
-<%= a.created_at %>
-<%= a.id %>
-<% end %>

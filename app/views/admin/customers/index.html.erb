@@ -1,2 +1,31 @@
-<h1>Admin::Customers#index</h1>
-<p>Find me in app/views/admin/customers/index.html.erb</p>
+<h2>会員一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>プロフィール画像</th>
+      <th>ニックネーム</th>
+      <th>年齢</th>
+      <th>性別</th>
+      <th>棋力</th>
+      <th>プロフィール</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= image_tag customer.get_customer_image(80,80) %></td>
+        <td><%= link_to customer.name,admin_customer_path(customer.id) %></td>
+        <td><%= (Date.today.strftime("%Y%m%d").to_i - customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+        </td>
+        <td><%= Customer.genders_i18n[:"#{customer.gender}"] %></td>
+        <td><%= customer.chess_ability %></td>
+        <td><%= customer.profile %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @customers %>
