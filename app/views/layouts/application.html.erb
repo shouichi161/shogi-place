@@ -20,7 +20,7 @@
         <%= link_to "ログアウト",destroy_customer_session_path,method: :delete %>
       <% elsif admin_signed_in? %>
         <%= link_to "会員一覧",admin_customers_path %>
-        <%= link_to "投稿一覧",admin_post_shogi_places_path %>
+        <%= link_to "投稿一覧",admin_path %>
         <%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
       <% else %>
         <%= link_to "About",about_path %>

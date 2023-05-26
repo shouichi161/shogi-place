@@ -1,5 +1,6 @@
 class Public::PostShogiPlacesController < ApplicationController
   before_action:is_matching_login_customer,only:[:edit,:update,:destroy]
+
   def new
     @post_shogi_place=PostShogiPlace.new
   end
