@@ -1,5 +1,21 @@
 <h2>投稿詳細</h2>
 
+<%= image_tag @post_shogi_place.get_shogi_place_image(200,200) %>
+<%= image_tag @post_shogi_place.customer.get_customer_image(80,80) %>
+<%= @post_shogi_place.customer.name %>
+<p>投稿日</p>
+<%= @post_shogi_place.created_at.strftime('%Y年%m月%d日') %><br>
+<%= @post_shogi_place.postcomments.count %>
+<%= @post_shogi_place.favorites.count %>
+
+<%= link_to "投稿削除",admin_post_shogi_place_path(@post_shogi_place.id),method: :delete,"data-confirm"=>"本当に削除しますか？" %>
+
+<p>対局場所名</p>
+<%= @post_shogi_place.name %>
+
+<p>住所</p>
+<%= @post_shogi_place.address %>
+
 <!-- Googleマップ表示エリア(地図を表示) -->
 <div style="width:400px; height:400px;" id="map"></div>
 
@@ -34,3 +50,41 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
 
+<p>電話番号</p>
+<%= @post_shogi_place.telephone_number %>
+
+<p>対象者</p>
+<% @target_audiences.each do |target_audience| %>
+  <%= target_audience.name %>
+<% end %>
+
+<p>説明</p>
+<%= @post_shogi_place.explanation %>
+
+<p>コメント一覧</p>
+
+<p><%= @post_shogi_place.postcomments.count %>件コメント</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>コメント日時</th>
+      <th>コメントした会員名</th>
+      <th>コメント内容</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @postcomments.each do |postcomment| %>
+    <tr>
+      <td><%= postcomment.created_at.strftime('%Y/%m/%d') %></td>
+      <td><%= postcomment.customer.name %></td>
+      <td><%= postcomment.comment %></td>
+      <td><%= link_to "コメント削除",admin_post_shogi_place_postcomment_path(postcomment.post_shogi_place,postcomment),method: :delete,"data-confirm"=>"本当に削除しますか？" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @postcomments %>
