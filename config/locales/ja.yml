@@ -5,9 +5,9 @@ ja:
         male: "男性"
         woman: "女性"
       membership_status:
-      member: "有効"
-      withdrawal: "退会"
-      stop: "停止"
+        member: "有効"
+        withdrawal: "退会"
+        stop: "停止"
 
   date:
     formats:
