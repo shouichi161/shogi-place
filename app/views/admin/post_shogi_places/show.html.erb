@@ -1,8 +1,9 @@
 <h2>投稿詳細</h2>
 
 <%= image_tag @post_shogi_place.get_shogi_place_image(200,200) %>
+
 <%= image_tag @post_shogi_place.customer.get_customer_image(80,80) %>
-<%= @post_shogi_place.customer.name %>
+<%= link_to @post_shogi_place.customer.name,admin_customer_path(@post_shogi_place.customer.id) %>
 <p>投稿日</p>
 <%= @post_shogi_place.created_at.strftime('%Y年%m月%d日') %><br>
 <%= @post_shogi_place.postcomments.count %>
