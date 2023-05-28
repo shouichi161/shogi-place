@@ -12,4 +12,8 @@ class Admin::PostShogiPlacesController < ApplicationController
     post_shogi_place.destroy
     redirect_to admin_path
   end
+
+  def search_keyword
+    @post_shogi_places=PostShogiPlace.looks(params[:range],params[:word])
+  end
 end

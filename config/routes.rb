@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resources:post_shogi_places,only:[:show,:destroy] do
       resources:postcomments,only:[:destroy]
     end
+    get 'search_keyword'=>'post_shogi_places#search_keyword'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
