@@ -1,0 +1,30 @@
+<h2>"<%= @prefecture.name %>"の"<%= @target_audience.name %>"の投稿一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>投稿日時</th>
+      <th>投稿者</th>
+      <th>画像</th>
+      <th>対局場所名</th>
+      <th>住所</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_shogi_places.each do |post_shogi_place| %>
+    <tr>
+      <td><%= post_shogi_place.created_at.strftime('%Y/%m/%d') %></td>
+      <td><%= link_to post_shogi_place.customer.name,admin_customer_path(post_shogi_place.customer.id) %></td>
+      <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %></td>
+      <td><%= link_to post_shogi_place.name,admin_post_shogi_place_path(post_shogi_place.id) %></td>
+      <td><%= post_shogi_place.address %></td>
+      <td><%= post_shogi_place.explanation %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to "投稿一覧へ戻る",admin_path %>

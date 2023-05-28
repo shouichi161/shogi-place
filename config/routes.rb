@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     end
     get 'search_tag'=>'post_shogi_places#search_tag'
     get 'search_keyword'=>'post_shogi_places#search_keyword'
+    get 'multi_criteria_search'=>'post_shogi_places#multi_criteria_search'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

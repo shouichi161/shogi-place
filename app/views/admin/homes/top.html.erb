@@ -10,6 +10,14 @@
   %>
     <% end %>
 
+<%= form_with url:admin_multi_criteria_search_path,method: :get,local: true do |f| %>
+  <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %><br>
+  <%= select_tag :target_audience_id,
+    options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id])
+  %>
+  <%= f.submit :multi_criteria_search %>
+<% end %>
+
 <table>
   <thead>
     <tr>
