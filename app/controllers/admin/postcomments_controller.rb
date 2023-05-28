@@ -1,4 +1,5 @@
 class Admin::PostcommentsController < ApplicationController
+  before_action:authenticate_admin!
   def destroy
     postcomment=Postcomment.find(params[:id])
     postcomment.destroy
