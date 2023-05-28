@@ -30,7 +30,7 @@
       <% if @post_shogi_place.favorited_by?(current_customer) %>
         <p>
           <%= link_to post_shogi_place_favorites_path(@post_shogi_place),method: :delete do %>
-          ❤<%=@post_shogi_place.favorites.count%>いいね
+          ❤<%= @post_shogi_place.favorites.count %>いいね
           <% end %>
         </p>
       <% else %>
