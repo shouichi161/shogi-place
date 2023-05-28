@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       resources:postcomments,only:[:create,:destroy]
       resource:favorites,only:[:create,:destroy]
     end
-    get "search_tag"=>"post_shogi_places#search_tag"
+    get 'search_tag'=>'post_shogi_places#search_tag'
     get 'search_keyword'=>'post_shogi_places#search_keyword'
     get 'multi_criteria_search'=>'post_shogi_places#multi_criteria_search'
   end
@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resources:post_shogi_places,only:[:show,:destroy] do
       resources:postcomments,only:[:destroy]
     end
+    get 'search_tag'=>'post_shogi_places#search_tag'
     get 'search_keyword'=>'post_shogi_places#search_keyword'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

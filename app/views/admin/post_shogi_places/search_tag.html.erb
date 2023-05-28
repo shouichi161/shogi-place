@@ -1,14 +1,4 @@
-<h2>投稿一覧</h2>
-
-<%= form_tag admin_path, method: :get, class: 'boards__searchForm' do %>
-  <%= select_tag :target_audience_id,
-    options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]),
-    {
-      prompt:'対象者絞り込み検索',
-      onchange:'submit(this.from);'
-    }
-  %>
-    <% end %>
+<h2>タグが"<%= @tag.name %>"の投稿一覧</h2>
 
 <table>
   <thead>
@@ -36,13 +26,12 @@
   </tbody>
 </table>
 
-<p>タグ検索</p>
 <!--タグリスト-->
 <% @tags.each do |tag| %>
-　<% unless tag.post_shogi_place.count==0 %>
+  <% unless tag.post_shogi_place.count==0 %>
     <%= link_to tag.name,admin_search_tag_path(tag_id: tag.id) %>
     <%= "(#{tag.post_shogi_place.count})" %>
   <% end %>
 <% end %>
 
-<%= paginate @post_shogi_places %>
+<%= link_to "投稿一覧へ戻る",admin_path %>

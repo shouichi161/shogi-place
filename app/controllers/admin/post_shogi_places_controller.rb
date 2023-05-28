@@ -13,6 +13,12 @@ class Admin::PostShogiPlacesController < ApplicationController
     redirect_to admin_path
   end
 
+  def search_tag
+    @tags=Tag.all
+    @tag=Tag.find(params[:tag_id])
+    @post_shogi_places=@tag.post_shogi_place.page(params[:page])
+  end
+
   def search_keyword
     @post_shogi_places=PostShogiPlace.looks(params[:range],params[:word])
   end
