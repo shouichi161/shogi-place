@@ -1,4 +1,5 @@
 class Admin::PostShogiPlacesController < ApplicationController
+  before_action:authenticate_admin!
   def show
     @post_shogi_place=PostShogiPlace.find(params[:id])
     @target_audiences=@post_shogi_place.target_audiences
