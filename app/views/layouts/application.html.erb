@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>ShogiPlace</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,6 +12,7 @@
 
   <body>
     <header>
+      <h1><a href="/"><%= image_tag '将棋アイコン2.png' %>shogi-place</a></h1>
       <% if customer_signed_in? %>
         <%= link_to "会員一覧",customers_path %>
         <%= link_to "投稿一覧",post_shogi_places_path %>
@@ -65,7 +66,9 @@
     <%= yield %>
     </main>
     <footer>
-      <p>©️️️All rights reserved by shogi_place</p>
+      <div style="width:100%; height:80px;" class="bg-light mt-5">
+        <p class="text-center pt-4">©️️️ All rights reserved by shogi_place</p>
+      </div>
     </footer>
   </body>
 </html>
