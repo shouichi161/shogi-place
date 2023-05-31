@@ -1,13 +1,24 @@
-<h2>ようこそ、shogi-placeへ</h2>
+<div class="container">
 
-<p>今はインターネットでも将棋が指せますが、実際に将棋盤を挟んで将棋を指すのは<br>
-   自分の手で実際に駒を動かしたり、道場で仲間ができたり、対局後に感想戦を行ったりできるなど、<br>
-   インターネットで将棋を指すのとは違った良さがあります。<br>
-   このサイトでは将棋道場（将棋を指せる場所）の情報を投稿したり、閲覧をすることができます。<br>
-   自分が将棋を指してみてよかった場所を投稿したり、自分に合った場所を探して将棋を指してみませんか。</p>
 
-<p>会員登録はこちら</p>
-<%= link_to "新規登録画面へ",new_customer_registration_path %>
+  <h2 class="text-center mt-5 mb-5">ようこそ、shogi-placeへ</h2>
 
-<p>既に会員登録済みの方はこちら</p>
-<%= link_to "ログイン画面へ",customer_session_path %>
+  <p class="text-center">今はインターネットでも将棋が指せますが、実際に将棋盤を挟んで将棋を指すのは自分の手で実際に駒を動かしたり、道場で仲間ができたり、
+     対局後に感想戦を行ったりできるなど、
+     インターネットで将棋を指すのとは違った良さがあります。<br>
+     このサイトでは将棋道場（将棋を指せる場所）の情報を投稿したり、閲覧をすることができます。<br>
+     自分が将棋を指してみてよかった場所を投稿したり、自分に合った場所を探して将棋を指してみませんか。</p>
+
+
+  <p class="text-center mt-5">会員登録はこちら</p>
+
+  <div class="row justify-content-center">
+    <%= link_to "新規登録画面へ",new_customer_registration_path,class:"btn btn-success w-sm-25"  %>
+  </div>
+
+  <p class="text-center mt-5">既に会員登録済みの方はこちら</p>
+
+  <div class="row justify-content-center">
+    <%= link_to "ログイン画面へ",customer_session_path,class:"btn btn-primary w-sm-25" %>
+  </div>
+</div>
