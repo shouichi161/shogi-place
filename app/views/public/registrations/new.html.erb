@@ -1,54 +1,73 @@
-<h2>新規会員登録</h2>
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">新規会員登録</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
 
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 col-10">
+        <label for="name">ニックネーム</label>
+      </div>
+      <%= f.text_field :name,id:"name", autofocus: true, autocomplete: "name",size:"30",class:"col-md-5 col-10" %>
+    </div>
 
-  <div class="field">
-    <label for="name">ニックネーム</label>
-    <%= f.text_field :name,id:"name", autofocus: true, autocomplete: "name" %>
-  </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 col-10">
+        <label for="email">メールアドレス</label>
+      </div>
+      <%= f.email_field :email,id:"email", autocomplete: "email",size:"30",class:"col-md-5 col-10" %>
+    </div>
 
-  <div class="field">
-    <label for="email">メールアドレス</label>
-    <%= f.email_field :email,id:"email", autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 col-10">
+        <label for="birth">生年月日</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.date_select :date_of_birth,id:"birth",use_month_numbers: true,start_year: 1920,end_year: (Time.now.year),default: Date.new(2000,1,1) %>
+      </div>
+    </div>
 
-  <div class="field">
-    <label for="birth">生年月日</label>
-    <%= f.date_select :date_of_birth,id:"birth",use_month_numbers: true,start_year: 1920,end_year: (Time.now.year),default: Date.new(2000,1,1) %>
-  </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 col-10">
+       <p>性別</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.radio_button:gender,"male",checked:true %>
+        <%= f.label:gender,"男性",{style: "display: inline-block;"} %>
+        <%= f.radio_button:gender,"woman",class:"ml-5" %>
+        <%= f.label:gender,"女性",{style: "desplay: inline-block;"} %>
+      </div>
+    </div>
 
-  <div class="field">
-    <p>性別</p>
-    <%= f.radio_button:gender,"male",checked:true %>
-    <%= f.label:gender,"男性",{style: "display: inline-block;"} %>
-    <%= f.radio_button:gender,"woman" %>
-    <%= f.label:gender,"女性",{style: "desplay: inline-block;"} %>
-  </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 col-10">
+        <label for="avility">棋力</label>
+      </div>
+      <%= f.text_field :chess_ability,id:"avility",class:"col-md-5 col-10" %>
+    </div>
 
-  <div class="field">
-    <label for="avility">棋力</label>
-    <%= f.text_field :chess_ability,id:"avility", autofocus: true %>
-  </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 col-10">
+        <label for="password">パスワード</label>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %>
+      </div>
+      <%= f.password_field :password,id:"password", autocomplete: "new-password",class:"col-md-5 col-10" %>
+    </div>
 
-  <div class="field">
-    <label for="password">パスワード</label>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %>
-    <%= f.password_field :password,id:"password", autocomplete: "new-password" %>
-  </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 col-10">
+        <label for="password_confirmation">パスワード（確認用)　</label>
+      </div>
+      <%= f.password_field :password_confirmation,id:"password_confirmation", autocomplete: "new-password",class:"col-md-5 col-10" %>
+    </div>
 
-  <div class="field">
-    <label for="password_confirmation">パスワード（確認用)</label>
-    <%= f.password_field :password_confirmation,id:"password_confirmation", autocomplete: "new-password" %>
-  </div>
+    <div class="row justify-content-center m-3">
+      <%= f.submit "新規登録",class:"btn btn-success col-md-3 col-7" %>
+    </div>
+  <% end %>
 
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
+  <%= render "public/shared/links" %>
 
-<p>既に登録済みの方</p>
-<%= render "public/shared/links" %>
+</div>
