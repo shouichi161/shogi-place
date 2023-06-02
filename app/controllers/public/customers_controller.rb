@@ -8,8 +8,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer=Customer.find(params[:id])
-    @post_shogi_places=@customer.post_shogi_places.page(params[:page])
-    @favorites=@customer.favorites.page(params[:page])
+    @post_shogi_places=@customer.post_shogi_places.page(params[:page]).per(5)
+    @favorites=@customer.favorites.page(params[:page]).per(5)
   end
 
   def edit
