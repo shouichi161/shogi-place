@@ -1,62 +1,75 @@
-<h2>会員詳細</h2>
-<%= @customer.membership_status %>
-<%= image_tag @customer.get_customer_image(100,100) %>
-<p>ニックネーム　<%= @customer.name %></p>
-<p>年齢　<%= (Date.today.strftime("%Y%m%d").to_i - @customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
-</p>
+<div class="container">
 
-<p>性別　<%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
-<p>棋力　<%= @customer.chess_ability %></p>
-<p>プロフィール　<%= @customer.profile %></p>
+  <h2 class="text-center mt-5 mb-5">会員詳細</h2>
 
-<% if @customer.id==current_customer.id %>
-  <%= link_to "編集する",edit_customer_path(@customer.id) %>
-<% end %>
+  <div class="row">
+    <div class="col-3 h-100 text-center border">
+      <%= image_tag @customer.get_customer_image(100,100),class:"center-block" %>
+      <p><%= @customer.name %></p>
+      <p>
+        年齢　<%= (Date.today.strftime("%Y%m%d").to_i - @customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+      </p>
 
-<p>投稿履歴一覧</p>
-<table>
-  <thead>
-    <tr>
-      <th>対局場所名</th>
-      <th>説明</th>
-      <th></th>
-    </tr>
-  </thead>
+      <p>性別　<%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
+      <p>棋力　<%= @customer.chess_ability %></p>
+      <p><%= @customer.profile %></p>
 
-  <tbody>
-    <% @post_shogi_places.each do |post_shogi_place| %>
-      <tr>
-        <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
-        <td><%= post_shogi_place.explanation %></td>
-        <% if @customer.id==current_customer.id %>
-          <td><%= link_to "編集",edit_post_shogi_place_path(post_shogi_place.id) %></td>
-          <td><%= link_to "削除",post_shogi_place_path(post_shogi_place.id),method: :delete,"data-confirm"=>"本当に削除しますか？"  %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @post_shogi_places %>
+      <% if @customer.id==current_customer.id %>
+        <%= link_to "編集する",edit_customer_path(@customer.id),class:"btn btn-success m-2" %>
+      <% end %>
+    </div>
 
-<p>お気に入り（いいねをした投稿一覧）</p>
+    <div class="offset-1 col-8">
+      <div class="row">
+        <p class="m-3">投稿履歴一覧</p>
+     　　 <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 30%">対局場所名</th>
+              <th style="width: 50%">説明</th>
+              <th style="width: 20%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @post_shogi_places.each do |post_shogi_place| %>
+              <tr>
+                <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
+                <td><%= post_shogi_place.explanation %></td>
+                <% if @customer.id==current_customer.id %>
+                  <td><%= link_to "詳細",post_shogi_place_path(post_shogi_place.id),class:"btn btn-success mr-2" %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @post_shogi_places %>
+      </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>画像</th>
-      <th>対局場所名</th>
-      <th>説明</th>
-    </tr>
-  </thead>
+      <% if @customer==current_customer %>
+      <div class="row mt-5">
+        <p class="m-3">お気に入り（いいねをした投稿一覧）</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 20%">画像</th>
+              <th style="width: 30%">対局場所名</th>
+              <th style="width: 50%">説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @favorites.each do |favorite| %>
+              <tr>
+                <td><%= image_tag favorite.post_shogi_place.get_shogi_place_image(80,80) %></td>
+                <td><%= link_to favorite.post_shogi_place.name,post_shogi_place_path(favorite.post_shogi_place.id) %></td>
+                <td><%= favorite.post_shogi_place.explanation %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @favorites %>
+      </div>
+      <% end %>
+    </div>
+  </div>
 
-  <tbody>
-    <% @favorites.each do |favorite| %>
-      <tr>
-        <td><%= image_tag favorite.post_shogi_place.get_shogi_place_image(80,80) %></td>
-        <td><%= link_to favorite.post_shogi_place.name,post_shogi_place_path(favorite.post_shogi_place.id) %></td>
-        <td><%= favorite.post_shogi_place.explanation %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @favorites %>
+</div>
