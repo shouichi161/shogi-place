@@ -1,37 +1,72 @@
-<h2>会員情報編集</h2>
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">会員情報編集</h2>
 
-<% if @customer.errors.any? %>
-  <%= @customer.errors.count %>件のエラーが発生しました。
-  <% @customer.errors.full_messages.each do |message| %>
-    <ul>
-      <li><%= message %></li>
-    </ul>
+  <% if @customer.errors.any? %>
+    <%= @customer.errors.count %>件のエラーが発生しました。
+    <% @customer.errors.full_messages.each do |message| %>
+      <ul>
+        <li><%= message %></li>
+      </ul>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= form_with model:@customer,url:customer_path(@customer.id),method: :patch do |f| %>
+  <%= form_with model:@customer,url:customer_path(@customer.id),method: :patch do |f| %>
 
-  <label for="image">プロフィール画像</label>
-  <%= f.file_field:customer_image,accept:"image/*",id:"image" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="image">プロフィール画像</label>
+      </div>
+      <%= f.file_field:customer_image,accept:"image/*",id:"image",class:"col-md-5 col-10" %><br>
+    </div>
 
-  <label for="name">ニックネーム</label>
-  <%= f.text_field:name,id:"name" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="name">ニックネーム</label>
+      </div>
+      <%= f.text_field:name,id:"name",class:"col-md-5 col-10" %><br>
+    </div>
 
-  <label for="email">メールアドレス</label>
-  <%= f.email_field:email,id:"email" %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="email">メールアドレス</label>
+      </div>
+      <%= f.email_field:email,id:"email",class:"col-md-5 col-10" %>
+    </div>
 
-  <p>生年月日</p>
-  <%= @customer.date_of_birth.strftime("%Y年%m月%d日") %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>生年月日</p>
+      </div>
+      <p class="col-md-5 col-10"><%= @customer.date_of_birth.strftime("%Y年%m月%d日")%></p>
+    </div>
 
-  <p>性別</p>
-  <%= Customer.genders_i18n[:"#{@customer.gender}"] %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>性別</p>
+      </div>
+      <p class="col-md-5 col-10"><%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
+    </div>
 
-  <labrl for="avility">棋力</labrl>
-  <%= f.text_field:chess_ability,id:"avility" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <labrl for="avility">棋力</labrl>
+      </div>
+      <%= f.text_field:chess_ability,id:"avility",class:"col-md-5 col-10" %>
+    </div>
 
-  <label for="profile">プロフィール</label>
-  <%= f.text_area:profile,id:"profile" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="profile">プロフィール</label>
+      </div>
+      <%= f.text_area:profile,id:"profile",class:"col-md-5 col-10 border-dark form-control", rows: 3 %>
+    </div>
 
-  <%= f.submit"変更内容を保存する" %>
-<% end %>
-  <%= link_to "退会する",'/customers/confilm' %>
+    <div class="row justify-content-center">
+
+        <%= f.submit"変更内容を保存",class:"btn btn-success mr-5 mt-3" %>
+        <%= link_to "退会する",'/customers/confilm',class:"btn btn-danger mt-3" %>
+
+    </div>
+  <% end %>
+
+</div>
