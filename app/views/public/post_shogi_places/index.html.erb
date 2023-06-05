@@ -1,35 +1,43 @@
-<h2>投稿一覧</h2>
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">投稿一覧</h2>
 
-<%= form_tag post_shogi_places_path, method: :get, class: 'boards__searchForm' do %>
-  <%= select_tag :target_audience_id,
-    options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]),
-    {
-      prompt:'対象者絞り込み検索',
-      onchange:'submit(this.from);'
-    }
-  %>
+  <div class="row justify-content-between">
+    <div class="col-5">
+　    <p>対象者で絞り込み</p>
+      <%= form_tag post_shogi_places_path, method: :get, class: 'boards__searchForm' do %>
+        <%= select_tag :target_audience_id,
+          options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]),
+          {prompt:'対象者絞り込み検索',
+          onchange:'submit(this.from);'}%>
+      <% end %>
+    </div>
+
+    <div class="col-5">
+      <p>都道府県と対象者で絞り込み</p>
+      <%= form_with url:multi_criteria_search_path,method: :get,local: true do |f| %>
+        <p>都道府県　<%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %></p>
+        <p>対象者　<%= select_tag :target_audience_id,
+          options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]) %>
+        </p>
+        <%= f.submit"検索" %>
+      <% end %>
+    </div>
+  </div>
+
+
+  <%= link_to "新規投稿する",new_post_shogi_place_path,class:"btn btn-primary" %>
+
+  <%= render'list',post_shogi_places:@post_shogi_places %>
+
+  <%= paginate @post_shogi_places %>
+
+  <p class="mt-5">タグ一覧</p>
+  <!--タグリスト-->
+  <% @tags.each do |tag| %>
+  　<% unless tag.post_shogi_place.count==0 %>
+      <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
+      <%= "(#{tag.post_shogi_place.count})" %>
     <% end %>
-
-<%= form_with url:multi_criteria_search_path,method: :get,local: true do |f| %>
-  <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %><br>
-  <%= select_tag :target_audience_id,
-    options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id])
-  %>
-  <%= f.submit :multi_criteria_search %>
-<% end %>
-
-<%= link_to "新規投稿する",new_post_shogi_place_path %>
-
-<%= render'list',post_shogi_places:@post_shogi_places %>
-
-<p>タグ検索</p>
-<!--タグリスト-->
-<% @tags.each do |tag| %>
-　<% unless tag.post_shogi_place.count==0 %>
-    <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
-    <%= "(#{tag.post_shogi_place.count})" %>
   <% end %>
-<% end %>
 
-
-<%= paginate @post_shogi_places %>
+</div>

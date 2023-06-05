@@ -1,13 +1,19 @@
-<h2>タグが"<%= @tag.name %>"の投稿一覧</h2>
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">タグが"<%= @tag.name %>"の投稿一覧</h2>
 
-<%= render'list',post_shogi_places:@post_shogi_places %>
+  <%= render'list',post_shogi_places:@post_shogi_places %>
+  <%= paginate @post_shogi_places %>
 
-<!--タグリスト-->
-<% @tags.each do |tag| %>
-  <% unless tag.post_shogi_place.count==0 %>
-    <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
-    <%= "(#{tag.post_shogi_place.count})" %>
+  <p class="mt-5">タグ一覧</p>
+  <!--タグリスト-->
+  <% @tags.each do |tag| %>
+    <% unless tag.post_shogi_place.count==0 %>
+      <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
+      <%= "(#{tag.post_shogi_place.count})" %>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= link_to "投稿一覧へ戻る",post_shogi_places_path %>
+  <div class="row justify-content-center">
+    <%= link_to "投稿一覧へ戻る",post_shogi_places_path,class:"btn btn-primary mt-3" %>
+  </div>
+</div>
