@@ -1,31 +1,23 @@
 <div class="container">
   <h2 class="text-center mt-5 mb-5">投稿一覧</h2>
 
-  <div class="row justify-content-between">
-    <div class="col-5">
-　    <p>対象者で絞り込み</p>
-      <%= form_tag post_shogi_places_path, method: :get, class: 'boards__searchForm' do %>
-        <%= select_tag :target_audience_id,
-          options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]),
-          {prompt:'対象者絞り込み検索',
-          onchange:'submit(this.from);'}%>
-      <% end %>
-    </div>
-
-    <div class="col-5">
+  <div class="row justify-content-between mb-3">
+    <div class="col-sm-6 col-12">
       <p>都道府県と対象者で絞り込み</p>
       <%= form_with url:multi_criteria_search_path,method: :get,local: true do |f| %>
         <p>都道府県　<%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %></p>
-        <p>対象者　<%= select_tag :target_audience_id,
+        <p>　対象者　<%= select_tag :target_audience_id,
           options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]) %>
+        <%= f.submit"検索",class:"inline-block" %>
         </p>
-        <%= f.submit"検索" %>
       <% end %>
+    </div>
+    <div class="d-flex justify-content-end align-items-end col-sm-6 col-12">
+      <%= link_to "新規投稿",new_post_shogi_place_path,class:"btn btn-success" %>
     </div>
   </div>
 
 
-  <%= link_to "新規投稿する",new_post_shogi_place_path,class:"btn btn-primary" %>
 
   <%= render'list',post_shogi_places:@post_shogi_places %>
 
