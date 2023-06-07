@@ -19,7 +19,8 @@ table {
   table-layout: fixed;
   width: 100%;
 }
-.explanation, .comment {
+.explanation,
+.comment {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
