@@ -1,48 +1,101 @@
-<h2>対局場所編集</h2>
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">対局場所編集</h2>
 
-<% if @post_shogi_place.errors.any? %>
-  <%= @post_shogi_place.errors.count %>件のエラーが発生しました。
-  <% @post_shogi_place.errors.full_messages.each do |message| %>
-    <ul>
-      <li><%= message %></li>
-    </ul>
+  <% if @post_shogi_place.errors.any? %>
+    <%= @post_shogi_place.errors.count %>件のエラーが発生しました。
+    <% @post_shogi_place.errors.full_messages.each do |message| %>
+      <ul>
+        <li><%= message %></li>
+      </ul>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= form_with model:@post_shogi_place,url:post_shogi_place_path(@post_shogi_place.id),method: :patch do |f | %>
+  <%= form_with model:@post_shogi_place,url:post_shogi_place_path(@post_shogi_place.id),method: :patch do |f | %>
 
-  <%= f.label:name,"対局場所名" %>
-  <%= f.text_field:name %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <%= f.label:name,"対局場所名"%>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:name,class:"w-100" %>
+      </div>
+    </div>
 
-  <%= f.label:prefecture,"都道府県" %>
-  <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{},{required:true} %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <%= f.label:prefecture,"都道府県" %>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{},{required:true} %>
+      </div>
+    </div>
 
-  <%= f.label:address,"住所" %>
-  <%= f.text_field:address %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <%= f.label:address,"住所" %>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:address,class:"w-100" %>
+      </div>
+    </div>
 
-  <%= f.label:telephone_number,"電話番号" %>
-  <%= f.text_field:telephone_number %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <%= f.label:telephone_number,"電話番号" %>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:telephone_number,class:"w-100" %>
+      </div>
+    </div>
 
-  <p>画像</p>
-  <%=f.file_field:shogi_place_image,accept:"image/*" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>画像</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%=f.file_field:shogi_place_image,accept:"image/*",class:"w-100" %>
+      </div>
+    </div>
 
-　<p>タグ</p>
-　<p>、で区切ると複数タグ登録ができます</p>
-　<%= f.text_field :tag_name,value:@tag_list %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+　      <p>タグ<br>
+           、（カンマ）で区切ることで<br>
+           複数のタグをつけることができます</p>
+　    </div>
+      <div class="col-md-5 col-10">
+　      <%= f.text_field :tag_name,value:@tag_list,class:"w-100"  %>
+　    </div>
+    </div>
 
-  <%= f.label:target_audience,"対象者" %>
-  <%= f.collection_check_boxes(:target_audience_ids, TargetAudience.all , :id, :name) do |target_audience| %>
-    <div>
-      <%= target_audience.label do %>
-        <%= target_audience.check_box %>
-        <%= target_audience.text %>
-      <% end %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <%= f.label:target_audience,"対象者" %>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.collection_check_boxes(:target_audience_ids, TargetAudience.all , :id, :name) do |target_audience| %>
+          <div>
+            <%= target_audience.label do %>
+              <%= target_audience.check_box %>
+              <%= target_audience.text %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <%= f.label:explanation,"説明" %>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_area:explanation,class:"border-dark w-100 form-control", rows: 4 %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <%= f.submit"保存する",class:"btn btn-success col-4" %>
     </div>
   <% end %>
 
-  <%= f.label:explanation,"説明" %>
-  <%= f.text_area:explanation %><br>
-
-  <%= f.submit"保存する" %>
-<% end %>
-
+</div>
