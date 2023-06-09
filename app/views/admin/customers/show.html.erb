@@ -1,61 +1,68 @@
-<h2>会員詳細</h2>
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">会員詳細</h2>
 
-<%= image_tag @customer.get_customer_image(80,80) %>
-<p>会員id　</p><%= @customer.id %>
-<p>ニックネーム</p><%= @customer.name %>
-<p>メールアドレス</p><%= @customer.email %>
-<p>生年月日</p><%= @customer.date_of_birth %>
-<p>性別</p><%= Customer.genders_i18n[:"#{@customer.gender}"] %>
-<p>棋力</p><%= @customer.chess_ability %>
-<p>プロフィール</p><%= @customer.profile %>
-<p>会員ステータス</p><%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %>
-<%= link_to "編集する",edit_admin_customer_path(@customer.id) %>
+  <div class="row">
+    <div class="col-md-4 col-12 mb-5">
+      <div class="text-center border p-3">
+        <%= image_tag @customer.get_customer_image(80,80),class:"m-3" %><br>
+        <p class="mb-3"><%= @customer.name %></p>
+        <p class="mb-3"><%= @customer.email %></p>
+        <p class="mb-3"><%= @customer.date_of_birth.strftime('%Y年%m月%d日')+"生" %></p>
+        <p>性別：<%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
+        <p>棋力：<%= @customer.chess_ability %></p>
+        <p class="border p-2"><%= @customer.profile %></p>
+        <p>会員ステータス：<%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></p>
+        <%= link_to "編集する",edit_admin_customer_path(@customer.id),class:"btn btn-success" %>
+      </div>
+    </div>
 
-<p>投稿履歴一覧</p>
+    <div class="offset-md-1 col-md-7 col-12">
+      <p class="text-center mb-3">投稿履歴一覧</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>画像</th>
-      <th>対局場所名</th>
-      <th>説明</th>
-      <th></th>
-    </tr>
-  </thead>
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th style="width:35%;">画像</th>
+            <th style="width:30%;">対局場所名</th>
+            <th style="width:35%;">説明</th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @post_shogi_places.each do |post_shogi_place| %>
-    <tr>
-      <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %></td>
-      <td><%= post_shogi_place.name %></td>
-      <td><%= post_shogi_place.explanation %></td>
-      <td><%= link_to "詳細",admin_post_shogi_place_path(post_shogi_place.id) %></td>
-    <% end %>
-    </tr>
-  </tbody>
-</table>
+        <tbody>
+          <% @post_shogi_places.each do |post_shogi_place| %>
+          <tr>
+            <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %></td>
+            <td><%= link_to post_shogi_place.name,admin_post_shogi_place_path(post_shogi_place.id) %></td>
+            <td><p class="explanation"><%= post_shogi_place.explanation %></p></td>
+          <% end %>
+          </tr>
+        </tbody>
+      </table>
 
-<%= paginate @post_shogi_places %>
+      <%= paginate @post_shogi_places %>
 
-<p>コメント履歴一覧</p>
-<table>
-  <thead>
-    <tr>
-      <th>対局場所名</th>
-      <th>コメント内容</th>
-      <th></th>
-    </tr>
-  </thead>
+      <p class="text-center mt-5 mb-3">コメント履歴一覧</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:30%;">対局場所名</th>
+            <th style="width:45%;">コメント内容</th>
+            <th style="width:25%;"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @postcomments.each do |postcomment| %>
-    <tr>
-      <td><%= postcomment.post_shogi_place.name %></td>
-      <td><%= postcomment.comment %></td>
-      <td><%= link_to "削除",admin_post_shogi_place_postcomment_path(postcomment.post_shogi_place,postcomment),method: :delete,"data-confirm"=>"本当に削除しますか？" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @postcomments.each do |postcomment| %>
+          <tr>
+            <td><%= postcomment.post_shogi_place.name %></td>
+            <td><%= postcomment.comment %></td>
+            <td><%= link_to "削除",admin_post_shogi_place_postcomment_path(postcomment.post_shogi_place,postcomment),method: :delete,"data-confirm"=>"本当に削除しますか？",class:"btn btn-danger" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<%= paginate @postcomments %>
+      <%= paginate @postcomments %>
+    </div>
+  </div>
+</div>
