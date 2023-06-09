@@ -1,49 +1,100 @@
-<h2>会員情報編集</h2>
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">会員情報編集</h2>
 
-<% if @customer.errors.any? %>
-<%= @customer.errors.count %>件のエラーが発生しました。
-  <% @customer.errors.full_messages.each do |message| %>
-    <ul>
-      <li><%= message %></li>
+  <% if @customer.errors.any? %>
+  <%= @customer.errors.count %>件のエラーが発生しました。
+    <% @customer.errors.full_messages.each do |message| %>
+      <ul>
+        <li><%= message %></li>
     </ul>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= image_tag @customer.get_customer_image(80,80) %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>会員id</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= @customer.id %>
+      </div>
+    </div>
 
-<p>会員id</p>
-<%= @customer.id %>
+  <%= form_with model:@customer,url:admin_customer_path(@customer.id),method: :patch do |f| %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="name">ニックネーム</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:name,id:"name",class:"w-100" %>
+      </div>
+    </div>
 
-<%= form_with model:@customer,url:admin_customer_path(@customer.id),method: :patch do |f| %>
-  <label for="name">ニックネーム</label>
-  <%= f.text_field:name,id:"name" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="email">メールアドレス</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.email_field:email,id:"email",class:"w-100" %>
+      </div>
+    </div>
 
-  <label for="email">メールアドレス</label>
-  <%= f.email_field:email,id:"email" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>生年月日</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.date_select :date_of_birth,use_month_numbers: true,start_year: 1920,end_year: (Time.now.year) %>
+      </div>
+    </div>
 
-  <p>生年月日</p>
-  <%= f.date_select :date_of_birth,use_month_numbers: true,start_year: 1920,end_year: (Time.now.year) %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>性別</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.radio_button:gender,"male" %>
+        <%= f.label:gender,"男性",{style: "display: inline-block;"} %>
+        <%= f.radio_button:gender,"woman",class:"ml-3" %>
+        <%= f.label:gender,"女性",{style: "display: inline-block;"} %>
+      </div>
+    </div>
 
-  <p>性別</p>
-  <%= f.radio_button:gender,"male" %>
-  <%= f.label:gender,"男性",{style: "display: inline-block;"} %>
-  <%= f.radio_button:gender,"woman" %>
-  <%= f.label:gender,"女性",{style: "display: inline-block;"} %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="ability">棋力</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:chess_ability,id:"ability",class:"w-100" %>
+      </div>
+    </div>
 
-  <label for="ability">棋力</label>
-  <%= f.text_field:chess_ability,id:"ability" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="profile">プロフィール</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_area:profile,id:"profile",class:"w-100",rows:3 %>
+      </div>
+    </div>
 
-  <label for="profile">プロフィール</label>
-  <%= f.text_area:profile,id:"profile" %><br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>会員ステータス</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.radio_button:membership_status,"member" %>
+        <%= f.label:membership_status,"有効",{style: "display: inline-block;"} %>
+        <%= f.radio_button:membership_status,"withdrawal",class:"ml-3" %>
+        <%= f.label:membership_status,"退会",{style: "display: inline-block;"} %>
+        <%= f.radio_button:membership_status,"stop",class:"ml-3" %>
+        <%= f.label:membership_status,"停止",{style: "display: inline-block;"} %>
+      </div>
+    </div>
 
-  <p>会員ステータス</p>
-  <%= f.radio_button:membership_status,"member" %>
-  <%= f.label:membership_status,"有効",{style: "display: inline-block;"} %>
-  <%= f.radio_button:membership_status,"withdrawal" %>
-  <%= f.label:membership_status,"退会",{style: "display: inline-block;"} %>
-  <%= f.radio_button:membership_status,"stop" %>
-  <%= f.label:membership_status,"停止",{style: "display: inline-block;"} %><br>
+    <div class="row justify-content-center">
+      <%= f.submit"更新する",class:"btn btn-success col-4aac" %>
+    </div>
 
-  <%= f.submit"更新する" %>
+  <% end %>
 
-<% end %>
+</div>
