@@ -8,14 +8,18 @@
       <div class="col-md-4 col-10">
         <label for="name">ニックネーム</label>
       </div>
-      <%= f.text_field :name,id:"name", autofocus: true, autocomplete: "name",size:"30",class:"col-md-5 col-10" %>
+      <div class="col-md-5 col-10">
+        <%= f.text_field :name,id:"name", autofocus: true, autocomplete: "name",class:"w-100" %>
+      </div>
     </div>
 
     <div class="row justify-content-center mb-4">
       <div class="col-md-4 col-10">
         <label for="email">メールアドレス</label>
       </div>
-      <%= f.email_field :email,id:"email", autocomplete: "email",size:"30",class:"col-md-5 col-10" %>
+      <div class="col-md-5 col-10">
+        <%= f.email_field :email,id:"email", autocomplete: "email",class:"w-100" %>
+      </div>
     </div>
 
     <div class="row justify-content-center mb-4">
@@ -43,7 +47,9 @@
       <div class="col-md-4 col-10">
         <label for="avility">棋力</label>
       </div>
-      <%= f.text_field :chess_ability,id:"avility",class:"col-md-5 col-10" %>
+      <div class="col-md-5 col-10">
+        <%= f.text_field :chess_ability,id:"avility",class:"w-100" %>
+      </div>
     </div>
 
     <div class="row justify-content-center mb-4">
@@ -53,14 +59,18 @@
         <em>(<%= @minimum_password_length %> 文字以上)</em>
         <% end %>
       </div>
-      <%= f.password_field :password,id:"password", autocomplete: "new-password",class:"col-md-5 col-10" %>
+      <div class="col-md-5 col-10">
+        <%= f.password_field :password,id:"password", autocomplete: "new-password",class:"w-100" %>
+      </div>
     </div>
 
     <div class="row justify-content-center mb-4">
       <div class="col-md-4 col-10">
         <label for="password_confirmation">パスワード（確認用)　</label>
       </div>
-      <%= f.password_field :password_confirmation,id:"password_confirmation", autocomplete: "new-password",class:"col-md-5 col-10" %>
+      <div class="col-md-5 col-10">
+        <%= f.password_field :password_confirmation,id:"password_confirmation", autocomplete: "new-password",class:"w-100" %>
+      </div>
     </div>
 
     <div class="row justify-content-center m-3">

@@ -247,3 +247,19 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+
+  activerecord:
+    models:
+      customer: '会員'
+    attributes:
+      customer:
+        name: 'ニックネーム'
+        email: 'メールアドレス'
+        chess_ability: '棋力'
+        password: 'パスワード'
+        password_confirmation: '確認用パスワード'
+      post_shogi_place:
+        name: '対局場所名'
+        address: '住所'
+        telephone_number: '電話番号'
+        explanation: '説明'

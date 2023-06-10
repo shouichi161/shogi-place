@@ -1,14 +1,16 @@
 <div class="container">
   <h2 class="text-center mt-5 mb-5">対局場所新規投稿</h2>
 
-  <% if @post_shogi_place.errors.any? %>
-    <%= @post_shogi_place.errors.count %>件のエラーが発生しました。
-    <% @post_shogi_place.errors.full_messages.each do |message| %>
-      <ul>
-        <li><%= message %></li>
-      </ul>
+  <div class="m-5">
+    <% if @post_shogi_place.errors.any? %>
+      <h5><%= @post_shogi_place.errors.count %>件のエラーが発生しました。</h5>
+      <% @post_shogi_place.errors.full_messages.each do |message| %>
+        <ul>
+          <li><%= message %></li>
+        </ul>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
   <%= form_with model:@post_shogi_place,url:post_shogi_places_path,method: :post do |f| %>
     <div class="row justify-content-center mb-4">
