@@ -247,3 +247,10 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+
+  activerecord:
+    attributes:
+      customer:
+        name: 'ニックネーム'
+        email: 'メールアドレス'
+        chess_ability: '棋力'
