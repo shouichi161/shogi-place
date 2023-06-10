@@ -249,8 +249,12 @@ ja:
       truncate: "..."
 
   activerecord:
+    models:
+      customer: '会員'
     attributes:
       customer:
         name: 'ニックネーム'
         email: 'メールアドレス'
         chess_ability: '棋力'
+        password: 'パスワード'
+        password_confirmation: '確認用パスワード'
