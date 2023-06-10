@@ -8,7 +8,7 @@
         <p>都道府県　<%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %></p>
         <p>　対象者　<%= select_tag :target_audience_id,
           options_from_collection_for_select(TargetAudience.all, :id, :name, params[:target_audience_id]) %>
-        <%= f.submit"検索",class:"inline-block" %>
+        <%= f.submit"検索" %>
         </p>
       <% end %>
     </div>
@@ -16,8 +16,6 @@
       <%= link_to "新規投稿",new_post_shogi_place_path,class:"btn btn-success" %>
     </div>
   </div>
-
-
 
   <%= render'list',post_shogi_places:@post_shogi_places %>
 

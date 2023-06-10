@@ -33,6 +33,7 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def edit
     @post_shogi_place=PostShogiPlace.find(params[:id])
+    @prefecture_id=@post_shogi_place.prefecture.id
     @tag_list=@post_shogi_place.tags.pluck(:name).join('、')
   end
 
