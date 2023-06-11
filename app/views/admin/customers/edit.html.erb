@@ -1,14 +1,15 @@
 <div class="container">
   <h2 class="text-center mt-5 mb-5">会員情報編集</h2>
 
-  <% if @customer.errors.any? %>
-  <%= @customer.errors.count %>件のエラーが発生しました。
-    <% @customer.errors.full_messages.each do |message| %>
-      <ul>
-        <li><%= message %></li>
-    </ul>
+  <div class="m-5"><% if @customer.errors.any? %>
+    <h5><%= @customer.errors.count %>件のエラーが発生しました。</h5>
+      <% @customer.errors.full_messages.each do |message| %>
+        <ul>
+          <li><%= message %></li>
+      </ul>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
     <div class="row justify-content-center mb-4">
       <div class="col-md-5 col-10">
