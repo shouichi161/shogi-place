@@ -1,4 +1,5 @@
 class Public::PostShogiPlacesController < ApplicationController
+  before_action:authenticate_customer!
   before_action:is_matching_login_customer,only:[:edit,:update,:destroy]
 
   def new
