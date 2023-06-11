@@ -13,14 +13,16 @@
     </thead>
     <tbody>
       <% @customers.each do |customer| %>
-        <tr>
-          <td><%= image_tag customer.get_customer_image(80,80) %></td>
-          <td class="align-middle"><%= link_to customer.name,customer_path(customer.id) %></td>
-          <td class="align-middle"><%= (Date.today.strftime("%Y%m%d").to_i - customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
-          </td>
-          <td class="align-middle"><%= Customer.genders_i18n[:"#{customer.gender}"] %></td>
-          <td class="align-middle"><%= customer.chess_ability %></td>
-        </tr>
+        <% unless customer.name=="ゲストユーザー" %>
+          <tr>
+            <td><%= image_tag customer.get_customer_image(80,80) %></td>
+            <td class="align-middle"><%= link_to customer.name,customer_path(customer.id) %></td>
+            <td class="align-middle"><%= (Date.today.strftime("%Y%m%d").to_i - customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+            </td>
+            <td class="align-middle"><%= Customer.genders_i18n[:"#{customer.gender}"] %></td>
+            <td class="align-middle"><%= customer.chess_ability %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

@@ -1,4 +1,5 @@
 class Public::PostShogiPlacesController < ApplicationController
+  before_action:authenticate_customer!
   before_action:is_matching_login_customer,only:[:edit,:update,:destroy]
 
   def new
@@ -27,6 +28,7 @@ class Public::PostShogiPlacesController < ApplicationController
   def show
     @post_shogi_place=PostShogiPlace.find(params[:id])
     @tags=@post_shogi_place.tags
+    @target_audiences=@post_shogi_place.target_audiences
     @postcomments=@post_shogi_place.postcomments.page(params[:page])
     @postcomment=Postcomment.new
   end

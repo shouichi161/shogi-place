@@ -1,4 +1,5 @@
 class Public::PostcommentsController < ApplicationController
+  before_action:authenticate_customer!
   def create
     @post_shogi_place=PostShogiPlace.find(params[:post_shogi_place_id])
     @postcomment=current_customer.postcomments.new(postcomment_params)
