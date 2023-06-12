@@ -54,6 +54,9 @@ class PostShogiPlace < ApplicationRecord
     favorites.exists?(customer_id:customer.id)
   end
 
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+
   def get_shogi_place_image(width,height)
     unless shogi_place_image.attached?
       file_path=Rails.root.join('app/assets/images/no_image.jpg')
