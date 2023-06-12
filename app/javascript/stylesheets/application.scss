@@ -2,7 +2,7 @@
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 .title{
-  font-family:"georgia",'verdana','sans-serif';
+  font-family:"Regular",'verdana','sans-serif';
 }
 
 body{
@@ -19,6 +19,7 @@ table {
   table-layout: fixed;
   width: 100%;
 }
+
 .explanation,
 .comment {
   overflow: hidden;
