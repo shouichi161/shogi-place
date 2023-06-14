@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
   before_action:authenticate_customer!
   before_action :ensure_normal_customer,only: [:update,:withdrawal]
-  before_action :is_matching_login_customer,only:[:edit,:update,:withdrawal]
+  before_action :is_matching_login_customer,only:[:edit,:update]
 
   def index
     @customers=Customer.page(params[:page])
