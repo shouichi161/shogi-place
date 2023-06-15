@@ -11,7 +11,15 @@
         <p>性別：<%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
         <p>棋力：<%= @customer.chess_ability %></p>
         <p class="p-2"><%= @customer.profile %></p>
-        <p>会員ステータス：<%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></p>
+
+        <% if @customer.membership_status=="member" %>
+            <p>会員ステータス：<span class="text-success"><%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></span></p>
+          <% elsif @customer.membership_status=="withdrawal" %>
+            <p>会員ステータス：<span class="text-secondary"><%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></span></p>
+          <% else %>
+            <p>会員ステータス：<span class="text-danger"><%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></span></p>
+          <% end %>
+
         <%= link_to "編集する",edit_admin_customer_path(@customer.id),class:"btn btn-success" %>
       </div>
     </div>
