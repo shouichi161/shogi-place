@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.create(name: 'aaa',email: 'a@a.aaa.com',password: 'aaaaaa')
+Admin.create(name: '管理者',email: 'admin@shogiplace.com',password: 'aaaaaa')
 
 TargetAudience.create([
   {name:'初心者向け'},
