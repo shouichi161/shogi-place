@@ -9,6 +9,7 @@ class Public::PostcommentsController < ApplicationController
        redirect_to post_shogi_place_path(@post_shogi_place)
     else
        @tags=@post_shogi_place.tags
+       @target_audiences=@post_shogi_place.target_audiences
        @postcomments=@post_shogi_place.postcomments.page(params[:page])
        render:'public/post_shogi_places/show'
     end

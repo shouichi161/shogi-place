@@ -18,7 +18,7 @@ class PostShogiPlace < ApplicationRecord
   validates:name,presence:true
   validates:address,presence:true
   validates:telephone_number,presence:true
-  validates:explanation,presence:true
+  validates:explanation,length: {minimum: 1,maximum: 255}
 
   def save_tag(sent_tags)
   # タグが存在していれば、タグの名前を配列として全て取得
