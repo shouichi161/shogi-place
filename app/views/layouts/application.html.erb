@@ -12,7 +12,6 @@
 
   <body class="d-flex flex-column vh-100">
     <header class="border-bottom m-3">
-
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <h1 class="title"><a href="/"><%= image_tag '将棋アイコン2.png' %>shogi-place</a></h1>
@@ -76,7 +75,7 @@
             <%= f.submit"検索" %>
           <% end %>
           </div>
-        <% else %>
+        <% elsif customer_signed_in? %>
           <!--キーワード検索欄-->
           <div class="search_form">
           <%= form_with url: search_keyword_path,local: true,method: :get do |f| %>
@@ -85,6 +84,8 @@
             <%= f.submit"検索" %>
           <% end %>
           </div>
+        <% else %>
+
         <% end %>
         </div>
 
