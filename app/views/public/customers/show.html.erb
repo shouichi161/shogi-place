@@ -1,6 +1,10 @@
 <div class="container">
 
-  <h2 class="text-center mt-5 mb-5">会員詳細</h2>
+  <% if @customer==current_customer %>
+    <h2 class="text-center mt-5 mb-5">マイページ</h2>
+  <% else %>
+    <h2 class="text-center mt-5 mb-5">会員詳細</h2>
+  <% end %>
 
   <div class="row">
     <div class="col-md-3 col-12 h-100 text-center border text-break mb-5 p-2">
@@ -66,6 +70,32 @@
         </table>
         <%= paginate @favorites %>
       </div>
+
+      <div class="row pt-5 border-top">
+        <h5 class="m-3">コメントをした投稿一覧</h5>
+        <table class="table text-break">
+          <thead>
+            <tr>
+              <th style="width: 30%">画像</th>
+              <th style="width: 30%">対局場所名</th>
+              <th style="width: 40%">説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @postcomments.each do |postcomment| %>
+              <tr>
+                <td><%= image_tag postcomment.post_shogi_place.get_shogi_place_image(80,80) %></td>
+                <td><%= link_to postcomment.post_shogi_place.name,post_shogi_place_path(postcomment.post_shogi_place.id) %></td>
+                <td><p class="explanation"><%= postcomment.post_shogi_place.explanation %></p></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @postcomments %>
+      </div>
+
+
+
       <% end %>
     </div>
   </div>

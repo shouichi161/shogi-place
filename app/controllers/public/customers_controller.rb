@@ -11,6 +11,7 @@ class Public::CustomersController < ApplicationController
     @customer=Customer.find(params[:id])
     @post_shogi_places=@customer.post_shogi_places.page(params[:page]).per(5)
     @favorites=@customer.favorites.page(params[:page]).per(5)
+    @postcomments=@customer.postcomments.page(params[:page]).per(5)
   end
 
   def edit
