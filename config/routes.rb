@@ -24,9 +24,6 @@ Rails.application.routes.draw do
       end
     end
     resources:post_shogi_places do
-      collection do
-
-      end
       resources:postcomments,only:[:create,:destroy]
       resource:favorites,only:[:create,:destroy]
     end
