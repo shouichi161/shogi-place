@@ -263,3 +263,5 @@ ja:
         address: '住所'
         telephone_number: '電話番号'
         explanation: '説明'
+      postcomment:
+        comment: 'コメント'
