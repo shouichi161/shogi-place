@@ -1,6 +1,10 @@
 <div class="container">
 
-  <h2 class="text-center mt-5 mb-5">会員詳細</h2>
+  <% if @customer==current_customer %>
+    <h2 class="text-center mt-5 mb-5">マイページ</h2>
+  <% else %>
+    <h2 class="text-center mt-5 mb-5">会員詳細</h2>
+  <% end %>
 
   <div class="row">
     <div class="col-md-3 col-12 h-100 text-center border text-break mb-5 p-2">
