@@ -9,6 +9,12 @@ class Public::PostShogiPlacesController < ApplicationController
   def create
     @post_shogi_place=PostShogiPlace.new(post_shogi_place_params)
     @post_shogi_place.customer_id=current_customer.id
+    # タグが存在していない時の処理
+    unless params[:post_shogi_place][:tag_name].present?
+      @post_shogi_place.save
+      @post_shogi_place.errors.add(:base, 'タグを入れてください')
+      return render :new
+    end
     # 受け取った値を、で区切って配列にする
     tag_list=params[:post_shogi_place][:tag_name].split('、')
     if @post_shogi_place.save
@@ -48,6 +54,13 @@ class Public::PostShogiPlacesController < ApplicationController
 
   def update
     @post_shogi_place=PostShogiPlace.find(params[:id])
+     # タグが存在していない時の処理
+    unless params[:post_shogi_place][:tag_name].present?
+      @post_shogi_place.update(post_shogi_place_params)
+      @post_shogi_place.errors.add(:base, 'タグを入れてください')
+      @tag_list=@post_shogi_place.tags.pluck(:name).join('、')
+      return render :edit
+    end
     # 入力されたタグを受け取る
     tag_list=params[:post_shogi_place][:tag_name].split('、')
     if @post_shogi_place.update(post_shogi_place_params)
