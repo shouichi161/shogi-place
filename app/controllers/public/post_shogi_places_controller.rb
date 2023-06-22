@@ -9,6 +9,10 @@ class Public::PostShogiPlacesController < ApplicationController
   def create
     @post_shogi_place=PostShogiPlace.new(post_shogi_place_params)
     @post_shogi_place.customer_id=current_customer.id
+    if @post_shogi_place.geocode.nil?
+      @post_shogi_place.errors.add(:base, '緯度経度が取得できませんでした')
+      return render:new
+    end
     # 対象者が存在していない時の処理
     unless @post_shogi_place.target_audience_ids.present?
       @post_shogi_place.errors.add(:base, '対象者を選択してください')
