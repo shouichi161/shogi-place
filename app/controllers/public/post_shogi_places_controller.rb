@@ -42,7 +42,6 @@ class Public::PostShogiPlacesController < ApplicationController
     else
       @post_shogi_places=PostShogiPlace.page(params[:page])
     end
-
     @tags=Tag.all
   end
 
