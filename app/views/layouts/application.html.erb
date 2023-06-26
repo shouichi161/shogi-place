@@ -2,15 +2,109 @@
 <html>
   <head>
     <title>ShogiPlace</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
+    <header class="border-bottom m-3">
+      <p class="text-danger text-center">現在登録されているデータは架空のものになります。</p>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <h1 class="title"><a href="/"><%= image_tag '将棋アイコン2.png' %>shogi-place</a></h1>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if customer_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "会員一覧",customers_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "投稿一覧",post_shogi_places_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "新規投稿",new_post_shogi_place_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "マイページ",customer_path(current_customer.id),class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト",destroy_customer_session_path,method: :delete,class:"nav-link text-dark" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "会員一覧",admin_customers_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "投稿一覧",admin_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト",destroy_admin_session_path,method: :delete,class:"nav-link text-dark" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "About",about_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "新規登録",new_customer_registration_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン",customer_session_path,class:"nav-link text-dark mr-3" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ゲストログイン",customers_guest_sign_in_path,method: :post,class:"nav-link text-dark" %>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+        <div class="pr-2 pb-2 d-flex justify-content-end">
+        <% if admin_signed_in? %>
+          <!--キーワード検索欄-->
+          <div class="search_form">
+          <%= form_with url: admin_search_keyword_path,local: true,method: :get do |f| %>
+            <%= f.select :range,options_for_select([['対局場所名'],['住所']]) %>
+            <%= f.text_field:word %>
+            <%= f.submit"検索" %>
+          <% end %>
+          </div>
+        <% elsif customer_signed_in? %>
+          <!--キーワード検索欄-->
+          <div class="search_form">
+          <%= form_with url: search_keyword_path,local: true,method: :get do |f| %>
+            <%= f.select :range,options_for_select([['対局場所名'],['住所']]) %>
+            <%= f.text_field:word %>
+            <%= f.submit"検索" %>
+          <% end %>
+          </div>
+        <% else %>
+
+        <% end %>
+        </div>
+
+    </header>
+
+    <main>
+      <div class="m-3">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag :div, message, class: message_type %>
+        <% end %>
+      </div>
+
     <%= yield %>
+    </main>
+    <footer>
+      <div style="width:100%; height:80px;" class="bg-light mt-5">
+        <p class="text-center pt-4">©️️️ All rights reserved by shogi-place</p>
+      </div>
+    </footer>
   </body>
 </html>

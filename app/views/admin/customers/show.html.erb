@@ -1,0 +1,76 @@
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">会員詳細</h2>
+
+  <div class="row">
+    <div class="col-md-4 col-12 mb-5">
+      <div class="text-center border p-3">
+        <%= image_tag @customer.get_customer_image(80,80),class:"m-3" %><br>
+        <p class="mb-3"><%= @customer.name %></p>
+        <p class="mb-3"><%= @customer.email %></p>
+        <p class="mb-3"><%= @customer.date_of_birth.strftime('%Y年%m月%d日')+"生" %></p>
+        <p>性別：<%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
+        <p>棋力：<%= @customer.chess_ability %></p>
+        <p class="p-2"><%= @customer.profile %></p>
+
+        <% if @customer.membership_status=="member" %>
+            <p>会員ステータス：<span class="text-success"><%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></span></p>
+          <% elsif @customer.membership_status=="withdrawal" %>
+            <p>会員ステータス：<span class="text-secondary"><%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></span></p>
+          <% else %>
+            <p>会員ステータス：<span class="text-danger"><%= Customer.membership_statuses_i18n[:"#{@customer.membership_status}"] %></span></p>
+          <% end %>
+
+        <%= link_to "編集する",edit_admin_customer_path(@customer.id),class:"btn btn-success" %>
+      </div>
+    </div>
+
+    <div class="offset-md-1 col-md-7 col-12">
+      <p class="text-center mb-3">投稿履歴一覧</p>
+
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th style="width:35%;">画像</th>
+            <th style="width:30%;">対局場所名</th>
+            <th style="width:35%;">説明</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @post_shogi_places.each do |post_shogi_place| %>
+          <tr>
+            <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %></td>
+            <td><%= link_to post_shogi_place.name,admin_post_shogi_place_path(post_shogi_place.id) %></td>
+            <td><p class="explanation"><%= post_shogi_place.explanation %></p></td>
+          <% end %>
+          </tr>
+        </tbody>
+      </table>
+
+      <%= paginate @post_shogi_places %>
+
+      <p class="text-center mt-5 mb-3">コメント履歴一覧</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:30%;">対局場所名</th>
+            <th style="width:45%;">コメント内容</th>
+            <th style="width:25%;"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @postcomments.each do |postcomment| %>
+          <tr>
+            <td><%= postcomment.post_shogi_place.name %></td>
+            <td><%= postcomment.comment %></td>
+            <td><%= link_to "削除",admin_post_shogi_place_postcomment_path(postcomment.post_shogi_place,postcomment),method: :delete,"data-confirm"=>"本当に削除しますか？",class:"btn btn-danger" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= paginate @postcomments %>
+    </div>
+  </div>
+</div>

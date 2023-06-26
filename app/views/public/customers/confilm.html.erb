@@ -1,0 +1,14 @@
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">退会確認</h2>
+
+  <p class="text-center">本当に退会しますか？<br>
+     <span class="font-weight-bold">退会するとアカウントが使用できなくなります。</span><br>
+     退会する場合は「退会する」を選んでください。</p>
+
+  <div class="row justify-content-center mt-5">
+    <%= link_to "退会しない",customer_path(current_customer.id),class:"btn btn-primary mr-5 mt-3" %>
+    <%= form_with model:@customer,url:'/customers/withdrawal',method: :patch do |f| %>
+      <%= f.submit"退会する","data-confirm"=>"本当に退会しますか？",class:"btn btn-danger mt-3" %>
+    <% end %>
+  </div>
+</div>

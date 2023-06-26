@@ -1,0 +1,29 @@
+@use '~bootstrap/scss/bootstrap';
+@use '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.title{
+  font-family:"Regular",'verdana','sans-serif';
+}
+
+body{
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+main{
+  flex: 1;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.explanation,
+.comment {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* 任意の行数を指定 */
+}

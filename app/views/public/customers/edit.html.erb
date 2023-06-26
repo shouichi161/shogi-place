@@ -1,0 +1,82 @@
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">会員情報編集</h2>
+
+  <div class="m-5">
+    <% if @customer.errors.any? %>
+      <h5><%= @customer.errors.count %>件のエラーが発生しました。</h5>
+      <% @customer.errors.full_messages.each do |message| %>
+        <ul>
+          <li><%= message %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= form_with model:@customer,url:customer_path(@customer.id),method: :patch do |f| %>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="image">プロフィール画像</label>
+      </div>
+      <%= f.file_field:customer_image,accept:"image/*",id:"image",class:"col-md-5 col-10" %><br>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="name">ニックネーム</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:name,id:"name",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="email">メールアドレス</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.email_field:email,id:"email",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>生年月日</p>
+      </div>
+      <p class="col-md-5 col-10"><%= @customer.date_of_birth.strftime("%Y年%m月%d日")%></p>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>性別</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= Customer.genders_i18n[:"#{@customer.gender}"] %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <labrl for="avility">棋力</labrl>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:chess_ability,id:"avility",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="profile">プロフィール</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_area:profile,id:"profile",class:"w-100 border-dark form-control", rows: 3 %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <%= f.submit"変更内容を保存",class:"btn btn-success mr-5 mt-3" %>
+        <%= link_to "退会する",'/customers/confilm',class:"btn btn-danger mt-3" %>
+    </div>
+  <% end %>
+
+</div>

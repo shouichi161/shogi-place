@@ -1,0 +1,101 @@
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">対局場所新規投稿</h2>
+
+  <div class="m-5">
+    <% if @post_shogi_place.errors.any? %>
+      <h5><%= @post_shogi_place.errors.count %>件のエラーが発生しました。</h5>
+      <% @post_shogi_place.errors.full_messages.each do |message| %>
+        <ul>
+          <li><%= message %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= form_with model:@post_shogi_place,url:post_shogi_places_path,method: :post do |f| %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="name">対局場所名</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:name,id:"name",placeholder:"施設名などを入力してください",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>都道府県</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.select:prefecture_id,options_from_collection_for_select(Prefecture.all,:id,:name),{include_blank:'選択してください'},{required:true} %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="address">住所</label>
+      </div>
+      <div class="col-md-5 col-10">
+      <%= f.text_field:address,id:"address",placeholder:"住所を入力してください",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="telephone">電話番号</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:telephone_number,id:"telephone",placeholder:"電話番号を入力してください",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>画像</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.file_field:shogi_place_image,accept:"image/*",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>タグ<br>
+           、（カンマ）で区切ることで<br>
+           複数のタグをつけることができます</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_field:tag_name,placeholder:"例：将棋教室、将棋大会、自由対局",class:"w-100" %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <p>対象者</p>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.collection_check_boxes(:target_audience_ids, TargetAudience.all , :id, :name) do |target_audience| %>
+          <div>
+            <%= target_audience.label do %>
+              <%= target_audience.check_box %>
+              <%= target_audience.text %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 col-10">
+        <label for="explanation">説明</label>
+      </div>
+      <div class="col-md-5 col-10">
+        <%= f.text_area:explanation,id:"explanation",placeholder:"どんなところか、雰囲気、感想などを入力してください",class:"border-dark w-100 form-control", rows: 5 %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <%= f.submit'投稿する',class:"btn btn-success col-4" %>
+    </div>
+  <% end %>
+</div>

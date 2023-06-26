@@ -1,0 +1,34 @@
+<div class="container">
+  <h2 class="text-center mt-5 mb-5">会員一覧</h2>
+
+  <table class="table table-striped text-break">
+    <thead>
+      <tr>
+        <th style="width: 35%">プロフィール画像</th>
+        <th style="width: 25%">ニックネーム</th>
+        <th style="width: 25%">メールアドレス</th>
+        <th style="width: 15%">ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= image_tag customer.get_customer_image(80,80) %></td>
+          <td class="align-middle"><%= link_to customer.name,admin_customer_path(customer.id) %></td>
+          <td class="align-middle"><%= customer.email %></td>
+
+          <% if customer.membership_status=="member" %>
+            <td class="align-middle text-success"><%= Customer.membership_statuses_i18n[:"#{customer.membership_status}"] %></td>
+          <% elsif customer.membership_status=="withdrawal" %>
+            <td class="align-middle text-secondary"><%= Customer.membership_statuses_i18n[:"#{customer.membership_status}"] %></td>
+          <% else %>
+            <td class="align-middle text-danger"><%= Customer.membership_statuses_i18n[:"#{customer.membership_status}"] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @customers %>
+
+</div>

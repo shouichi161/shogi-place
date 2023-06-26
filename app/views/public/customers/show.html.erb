@@ -1,0 +1,100 @@
+<div class="container">
+
+  <% if @customer==current_customer %>
+    <h2 class="text-center mt-5 mb-5">マイページ</h2>
+  <% else %>
+    <h2 class="text-center mt-5 mb-5">会員詳細</h2>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-3 col-12 h-100 text-center border text-break mb-5 p-2">
+      <%= image_tag @customer.get_customer_image(100,100),class:"center-block" %>
+      <p><%= @customer.name %></p>
+      <p>
+        年齢　<%= (Date.today.strftime("%Y%m%d").to_i - @customer.date_of_birth.strftime("%Y%m%d").to_i) / 10000 %>歳
+      </p>
+
+      <p>性別　<%= Customer.genders_i18n[:"#{@customer.gender}"] %></p>
+      <p>棋力　<%= @customer.chess_ability %></p>
+      <p><%= @customer.profile %></p>
+
+      <% if @customer.id==current_customer.id %>
+        <%= link_to "編集する",edit_customer_path(@customer.id),class:"btn btn-success m-2" %>
+      <% end %>
+    </div>
+
+    <div class="offset-md-1 col-md-8 col-12">
+      <div class="row mb-5">
+        <h5 class="m-3">投稿履歴一覧</h5>
+     　　 <table class="table text-break">
+          <thead>
+            <tr>
+              <th style="width: 30%">画像</th>
+              <th style="width: 30%">対局場所名</th>
+              <th style="width: 40%">説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @post_shogi_places.each do |post_shogi_place| %>
+              <tr>
+                <td><%= image_tag post_shogi_place.get_shogi_place_image(80,80) %></td>
+                <td><%= link_to post_shogi_place.name,post_shogi_place_path(post_shogi_place.id) %></td>
+                <td><p class="explanation"><%= post_shogi_place.explanation %></p></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @post_shogi_places %>
+      </div>
+
+      <% if @customer==current_customer %>
+      <div class="row pt-5 border-top">
+        <h5 class="m-3">いいねをした投稿一覧</h5>
+        <table class="table text-break">
+          <thead>
+            <tr>
+              <th style="width: 30%">画像</th>
+              <th style="width: 30%">対局場所名</th>
+              <th style="width: 40%">説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @favorites.each do |favorite| %>
+              <tr>
+                <td><%= image_tag favorite.post_shogi_place.get_shogi_place_image(80,80) %></td>
+                <td><%= link_to favorite.post_shogi_place.name,post_shogi_place_path(favorite.post_shogi_place.id) %></td>
+                <td><p class="explanation"><%= favorite.post_shogi_place.explanation %></p></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @favorites %>
+      </div>
+
+      <div class="row pt-5 border-top">
+        <h5 class="m-3">コメントをした投稿一覧</h5>
+        <table class="table text-break">
+          <thead>
+            <tr>
+              <th style="width: 30%">画像</th>
+              <th style="width: 30%">対局場所名</th>
+              <th style="width: 40%">説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @postcomments.each do |postcomment| %>
+              <tr>
+                <td><%= image_tag postcomment.post_shogi_place.get_shogi_place_image(80,80) %></td>
+                <td><%= link_to postcomment.post_shogi_place.name,post_shogi_place_path(postcomment.post_shogi_place.id) %></td>
+                <td><p class="explanation"><%= postcomment.post_shogi_place.explanation %></p></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @postcomments %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
