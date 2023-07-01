@@ -7,7 +7,7 @@ class PostShogiPlace < ApplicationRecord
   has_many:tags,                    through: :taggings
   belongs_to:customer
   belongs_to:prefecture
-
+  attr_accessor :tag_name
   # 住所登録時と変更時にgeocoderが緯度・経度のデータを登録・更新するのに必要
   geocoded_by :address
   after_validation :geocode
