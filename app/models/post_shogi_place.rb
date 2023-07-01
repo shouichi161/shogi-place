@@ -32,18 +32,12 @@ class PostShogiPlace < ApplicationRecord
     #古いタグを消す
       old_tags.each do |old|
       self.tags.delete Tag.find_by(name: old)
-    end
+      end
 
     # 新しいタグを保存
       new_tags.each do |new|
       new_tagging=Tag.find_or_create_by(name: new)
         self.tags << new_tagging
-      end
-    else
-    # 新しいタグを保存
-      sent_tags.each do |new|
-      new_tagging=Tag.find_or_create_by(name: new)
-      self.tags << new_tagging
       end
     end
   end
