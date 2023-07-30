@@ -1,5 +1,6 @@
 class Public::PostcommentsController < ApplicationController
   before_action:authenticate_customer!
+  before_action:is_matching_login_customer,only:[:destroy]
   def create
     @post_shogi_place=PostShogiPlace.find(params[:post_shogi_place_id])
     @postcomment=current_customer.postcomments.new(postcomment_params)
@@ -25,6 +26,13 @@ class Public::PostcommentsController < ApplicationController
 
   def postcomment_params
     params.require(:postcomment).permit(:post_shogi_place_id,:customer_id,:comment)
+  end
+
+  def is_matching_login_customer
+    postcomment=Postcomment.find(params[:id])
+    unless postcomment.customer.id==current_customer.id
+      redirect_to post_shogi_place_path(params[:post_shogi_place_id])
+    end
   end
 
 end
