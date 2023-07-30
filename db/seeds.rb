@@ -81,13 +81,13 @@ Prefecture.create(name: '沖縄')
 
 PostShogiPlace.create!(
   [
-    {customer_id: 1,prefecture_id: 13,name: '東京将棋会館',address: '東京都千駄ヶ谷区2丁目39-9',telephone_number: '123-456-7890',explanation: '東京にある将棋会館で２Fの将棋道場で対局ができます。手合い係の人が同じくらいの棋力の人と手合いをつけてくれるので、初めての人でも安心です。たくさん人がいて賑やかです。'},
-    {customer_id: 2,prefecture_id: 27,name: '関西将棋会館',address: '大阪府大阪市福島区6丁目3-11関西将棋会館',telephone_number: '987-6543-210',explanation: '関西にある将棋会館です。色々な強さの人がいるので棋力に関係なく楽しめます。 １Fには売店があります。'},
-    {customer_id: 3,prefecture_id: 37,name: '香川道場',address: '香川県高松市',telephone_number: '333-3333-3333',explanation: '月一回将棋大会が行われています。 強い人が集まっているので有段者向けです。'},
-    {customer_id: 8,prefecture_id: 13,name: '東京道場',address: '東京都東品川',telephone_number: '222-222-2222',explanation: '強い人が集まる場所です。腕に自信がある人向けです。'},
-    {customer_id: 1,prefecture_id: 1,name: '北海道将棋教室',address: '北海道札幌市',telephone_number: '555-555-5555',explanation: '将棋教室がメインです。初心者向けです。 ゆっくり丁寧に教えてくれるので初めての人でも安心です。'},
-    {customer_id: 9,prefecture_id: 29,name: '奈良将棋教室',address: '奈良県奈良市',telephone_number: '666-666-6666',explanation: '奈良県にある将棋教室です。初心者向けです。'},
-    {customer_id: 10,prefecture_id: 13,name: '東京道場',address: '東京都東品川',telephone_number: '222-222-2222',explanation: '強い人がたくさんいました。対局後に感想戦を行い、とても勉強になりました。'}
+    {customer_id: Customer.find_by(name:'将棋太郎').id,prefecture_id: Prefecture.find_by(name:'東京').id,name: '東京将棋会館',address: '東京都千駄ヶ谷区2丁目39-9',telephone_number: '123-456-7890',explanation: '東京にある将棋会館で２Fの将棋道場で対局ができます。手合い係の人が同じくらいの棋力の人と手合いをつけてくれるので、初めての人でも安心です。たくさん人がいて賑やかです。'},
+    {customer_id: Customer.find_by(name:'桂棋譜名木').id,prefecture_id: Prefecture.find_by(name:'大阪').id,name: '関西将棋会館',address: '大阪府大阪市福島区6丁目3-11関西将棋会館',telephone_number: '987-6543-210',explanation: '関西にある将棋会館です。色々な強さの人がいるので棋力に関係なく楽しめます。 １Fには売店があります。'},
+    {customer_id: Customer.find_by(name:'香子').id,prefecture_id: Prefecture.find_by(name:'香川').id,name: '香川道場',address: '香川県高松市',telephone_number: '333-3333-3333',explanation: '月一回将棋大会が行われています。 強い人が集まっているので有段者向けです。'},
+    {customer_id: Customer.find_by(name:'有栖').id,prefecture_id: Prefecture.find_by(name:'東京').id,name: '東京道場',address: '東京都東品川',telephone_number: '222-222-2222',explanation: '強い人が集まる場所です。腕に自信がある人向けです。'},
+    {customer_id: Customer.find_by(name:'将棋太郎').id,prefecture_id: Prefecture.find_by(name:'北海道').id,name: '北海道将棋教室',address: '北海道札幌市',telephone_number: '555-555-5555',explanation: '将棋教室がメインです。初心者向けです。 ゆっくり丁寧に教えてくれるので初めての人でも安心です。'},
+    {customer_id: Customer.find_by(name:'司').id,prefecture_id: Prefecture.find_by(name:'奈良').id,name: '奈良将棋教室',address: '奈良県奈良市',telephone_number: '666-666-6666',explanation: '奈良県にある将棋教室です。初心者向けです。'},
+    {customer_id: Customer.find_by(name:'奈紗').id,prefecture_id: Prefecture.find_by(name:'東京').id,name: '東京道場',address: '東京都東品川',telephone_number: '222-222-2222',explanation: '強い人がたくさんいました。対局後に感想戦を行い、とても勉強になりました。'}
   ]
   )
 
