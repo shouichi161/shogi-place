@@ -20,7 +20,7 @@ RSpec.describe "customer",type: :system do
       context '表示の確認' do
         it '会員情報が表示されているか' do
           expect(page).to have_content @customer.name
-      　end
+        end
       end
     end
 
