@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "Post_shogi_places",type: :system do
   before do
     @customer = FactoryBot.create(:customer) #FactoryBotをを利用してcustomerデータを作成
+    sign_in @customer
   end
 
   describe '投稿画面(new_post_shogi_place_path)のテスト' do
     before do
-      sign_in @customer
       visit new_post_shogi_place_path
     end
     context '表示の確認' do
