@@ -33,6 +33,13 @@ RSpec.describe "customer",type: :system do
           expect(page).to have_link '編集する'
         end
       end
+      context 'リンクの移動先を確認' do
+        it '編集の移動先は編集画面か' do
+          edit_link = find_all('a')[6]
+          edit_link.click
+          expect(current_path).to eq('/customers/' + @customer.id.to_s + '/edit')
+        end
+      end
     end
 
   end
